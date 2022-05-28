@@ -1,0 +1,131 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\setlength{\marginparwidth}{2cm}
+
+% make the chapter headings look nice
+% \usepackage{titlesec}
+% \titleformat{\chapter}[hang] 
+% {\normalfont\huge\bfseries}{\thechapter}{0.25em}{} 
+
+% pdf inclusion
+\usepackage{pdfpages}
+
+% inline todo
+\usepackage{todonotes}
+\newcommand{\todoinline}[1]{\todo[inline]{#1}}
+
+% nice indicator function and mathbb/mathfrak
+\usepackage{bbm}
+\usepackage{amssymb}
+
+% text in math mode
+\usepackage{amsmath}
+
+% theorems
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% algorithms
+\usepackage[linesnumbered, ruled, noline, noend]{algorithm2e}
+
+% add toc dots after chapter (i.e. update chapter leaders)
+% \usepackage{tocloft}
+% \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+% bibliography
+\usepackage[
+    backend=biber,
+    style=authoryear-icomp,
+    sortlocale=de_DE,
+    natbib=true,
+    url=false, 
+    doi=true,
+    eprint=false
+]{biblatex}
+\addbibresource{literature.bib}
+
+% proper pdf linking
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+	citecolor=blue,    
+    urlcolor=blue,
+    bookmarksopen=true,
+    pdftitle={asdf}
+}
+\usepackage{bookmark}
+
+% easy math commands
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\NinN}[1][n]{\ensuremath{#1 \in \N}}
+\newcommand{\Ninf}[1][n]{\ensuremath{#1 \rightarrow \infty}}
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\RZero}{\ensuremath{\R_{\ge 0}}}
+\newcommand{\Rbar}{\ensuremath{\overline{\R}}}
+\newcommand{\ELL}[1]{\ensuremath{\mathcal{L}^{#1}}}
+\newcommand{\K}{\ensuremath{\mathbb{K}}}
+\newcommand{\indic}[2][]{\ensuremath{\mathbbm{1}_{#2}#1}}
+\newcommand{\M}[2][]{\ensuremath{\mathcal{M}_{#1}(#2)}}
+\newcommand{\PM}[1]{\ensuremath{\mathcal{P}(#1)}}
+\newcommand{\TP}[2]{\ensuremath{\Pi(#1, #2)}}
+\newcommand{\push}[2][T]{\ensuremath{{#1} \# #2}}
+\newcommand{\MF}[3][]{\ensuremath{\mathfrak{M}_{#1}(#2, #3)}}
+\newcommand{\inner}[2]{\ensuremath{\langle #1, #2 \rangle}}
+\newcommand{\conj}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\map}[3][\varphi]{\ensuremath{#1:#2\rightarrow#3}}
+\newcommand{\weak}[2]{\ensuremath{#1 \rightharpoonup #2}}
+\newcommand{\leb}[2][]{\ensuremath{\lambda^{#1}(#2)}}
+\newcommand{\supp}[1]{\ensuremath{\text{supp}(#1)}}
+\newcommand{\CF}[2][]{\ensuremath{C_{#1}(#2)}}
+\newcommand{\D}[1][\mu]{\ensuremath{\text{\normalfont{}d}{#1}}}
+\newcommand{\Dx}[2][x]{\ensuremath{\text{\normalfont{}d}{#2}({#1})}}
+\newcommand{\CConc}[1]{\ensuremath{c\text{-}conc(#1)}}
+\newcommand{\CBConc}[1]{\ensuremath{\bar{c}\text{-}conc(#1)}}
+\newcommand{\Orlicz}[2][\Omega]{\ensuremath{L^{#2}(#1)}}
+\newcommand{\LLL}[1][\Omega]{\ensuremath{L \log L (#1)}}
+\newcommand{\Lexp}[1][\Omega]{\ensuremath{L_{\exp}(#1)}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% figures
+\graphicspath{{images/}}
+\renewcommand{\thefigure}{\arabic{figure}}
+
+% title
+\title{
+{asdf}
+}
+\author{Peter Oehme}
+\date{24 June 2022}
+
+\begin{document}
+
+\maketitle
+
+% \tableofcontents
+\pagenumbering{arabic}
+\pagestyle{plain}
+
+\begin{abstract}
+    asdf
+\end{abstract}
+
+\cite{Keil2021} asdf
+
+% \pagenumbering{roman}
+% \pagestyle{plain}
+% \include{chapters/appendix.tex}
+% \phantomsection{}
+% \addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography{}
+
+\end{document}
