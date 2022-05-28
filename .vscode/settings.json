@@ -14,5 +14,6 @@
 		"**/*.bcf": true,
 		"**/*.xml": true,
 		"**/*.blg": true,
+		".vscode": true
 	}
 }
