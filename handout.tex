@@ -1,12 +1,8 @@
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % enable italics in titles
 \usepackage{graphicx}
 \setlength{\marginparwidth}{2cm}
-
-% make the chapter headings look nice
-% \usepackage{titlesec}
-% \titleformat{\chapter}[hang] 
-% {\normalfont\huge\bfseries}{\thechapter}{0.25em}{} 
 
 % pdf inclusion
 \usepackage{pdfpages}
@@ -34,10 +30,6 @@
 
 % algorithms
 \usepackage[linesnumbered, ruled, noline, noend]{algorithm2e}
-
-% add toc dots after chapter (i.e. update chapter leaders)
-% \usepackage{tocloft}
-% \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 % bibliography
 \usepackage[
@@ -101,31 +93,35 @@
 \renewcommand{\thefigure}{\arabic{figure}}
 
 % title
-\title{
-{asdf}
-}
+\title{A Non-Conforming Dual Approach for Adaptive Trust-Region Reduced Basis Approximation of PDE-Constrained Parameter Optimization}
 \author{Peter Oehme}
 \date{24 June 2022}
 
 \begin{document}
 
 \maketitle
-
-% \tableofcontents
 \pagenumbering{arabic}
 \pagestyle{plain}
 
+% abstract
 \begin{abstract}
-    asdf
+    \todoinline{Write abstract for handout}
 \end{abstract}
 
-\cite{Keil2021} asdf
+\todoinline{Think about overall introductory paragraph}
 
-% \pagenumbering{roman}
-% \pagestyle{plain}
-% \include{chapters/appendix.tex}
-% \phantomsection{}
-% \addcontentsline{toc}{chapter}{Bibliography}
+% section 1
+\input{sections/sec1.tex}
+
+% section 2
+\input{sections/sec2.tex}
+
+% section 3
+\input{sections/sec3.tex}
+
+% section 4
+\input{sections/sec4.tex}
+
 \printbibliography{}
 
 \end{document}
