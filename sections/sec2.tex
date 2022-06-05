@@ -2,9 +2,35 @@
 
 \todoinline{Write introductory paragraph}
 
-\subsection{Reduced Basis Methods}
+\subsection{Reduced Basis Method}
 
-\todoinline{Write paragraph about RBM}
+This section introduces the reduced basis method (RBM) motivated by a consideration of parametrized PDEs with a large number of parameters.
+A quick overview of RBM the reduced basis method will be given here, while its advantages, limitations, and challenges can be found in works such as~\cite{Ohlberger2015}, \cite{Quarteroni2015} or~\cite{Hesthaven2016}.
+
+The main cause for RBM is the fast computation of PDEs for multiple parameter values.
+This might be an objective in optimization, parameter identification or other similar multi-query scenarios where the repeated computation might otherwise be too expensive.
+The central constraint for these methods is to find some $u \in V$ such that the following equation may be satisfied
+\begin{equation}\label{StateEq}
+    a_\mu(u, v) = l_\mu(v) \qquad \forall v \in V,
+\end{equation}
+where $a_\mu$ is a continuous, coercive, bilinear form and $l_\mu$ is a continuous linear functional on some function space $V$.
+The specific choice of $V$ does not play a role for the general introduction of RBM but it will matter later on.
+
+A key assumption is that of \textbf{parameter-separability}.
+This means that we can decompose $a_\mu$ and $l_\mu$ in the following manner
+\begin{equation}\label{ParamSep}
+    a_\mu(u, v) = \sum\limits_{i = 1}^{p_a} \theta_i^a(\mu) \, a_i(u, v), \qquad l_\mu(v) = \sum\limits_{i = 1}^{p_l} \theta_i^l(\mu) \, l_i(v),
+\end{equation}
+where the $\theta$ are parameter functions for $a_\mu$ and $l_\mu$ respectively, the $p$ are the number of parameters for $a_\mu$ and $l_\mu$ respectively, and the $a_i$ and $l_i$ are the parameter independent components for $a_\mu$ and $l_\mu$ respectively.
+
+With this assumption in hand, we can introduce the idea which enables RBM to repeatedly compute the solution for different parameters: the \textbf{offline-online-decomposition}.
+The principal idea is to first assemble the parameter independent system of equations and later only compute the parameter dependent parts for each parameter.
+In this procedure, the computationally complex assembly is done only once (\textbf{offline phase}), while the computationally faster \textit{parametrization} can be repeated multiple times (\textbf{online phase}).
+\todoinline{look up specifics for offline-online decomp!}
+\todoinline{look up better description for parametrization!}
+\todoinline{add computational complexities here!}
+
+\todoinline{Write paragraph about basis selection: greedy, POD, DEIM!}
 
 \subsection{Fr\'{e}chet and Gateaux Differentiablility}
 
