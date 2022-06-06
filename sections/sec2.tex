@@ -5,32 +5,55 @@
 \subsection{Reduced Basis Method}
 
 This section introduces the reduced basis method (RBM) motivated by a consideration of parametrized PDEs with a large number of parameters.
-A quick overview of RBM the reduced basis method will be given here, while its advantages, limitations, and challenges can be found in works such as~\cite{Ohlberger2015}, \cite{Quarteroni2015} or~\cite{Hesthaven2016}.
+This might be the case in optimization, parameter identification or other similar multi-query scenarios where the repeated computation might otherwise be too expensive.
+A quick overview of RBM the reduced basis method will be given here, while its advantages, limitations, and challenges can be found in works such as~\cite{Ohlberger2015},~\cite{Quarteroni2015} or~\cite{Hesthaven2016}.
 
-The main cause for RBM is the fast computation of PDEs for multiple parameter values.
-This might be an objective in optimization, parameter identification or other similar multi-query scenarios where the repeated computation might otherwise be too expensive.
-The central constraint for these methods is to find some $u \in V$ such that the following equation may be satisfied
-\begin{equation}\label{StateEq}
+We start off with a generic description of the finite element method.
+The central problem for this method is to find some $u \in V$ such that the following equation may be satisfied
+\begin{equation}\label{FOMEq}
     a_\mu(u, v) = l_\mu(v) \qquad \forall v \in V,
 \end{equation}
 where $a_\mu$ is a continuous, coercive, bilinear form and $l_\mu$ is a continuous linear functional on some function space $V$.
-The specific choice of $V$ does not play a role for the general introduction of RBM but it will matter later on.
+In general, $V$ is supposed to be a high dimensional function space used to obtain a model with negligible error when compared to the true solution.
+This model is called the full order model (FOM).
+We note here that the resulting system of equations is far too expensive to compute for mutliple parameter values in sequence, motivating the introduction of RBM.\@
 
-A key assumption is that of \textbf{parameter-separability}.
+The first step is to only consider a certain $N$-dimensional subspace $V_N \subseteq V$ of the FOM space, where $N << \dim(V)$.
+As a result the problem we want to solve is to find some $u_N \in V_N$ such that
+\begin{equation}\label{ROMEq}
+    a_\mu(u_N, v) = l_\mu(v) \qquad \forall v \in V_N,
+\end{equation}
+is satisfied.
+Thus far, the complexity to solve this problem for multiple parameters has been reduced, however we can do even better.
+The key assumption to acheive this is the so-called \textbf{parameter-separability}.
 This means that we can decompose $a_\mu$ and $l_\mu$ in the following manner
 \begin{equation}\label{ParamSep}
-    a_\mu(u, v) = \sum\limits_{i = 1}^{p_a} \theta_i^a(\mu) \, a_i(u, v), \qquad l_\mu(v) = \sum\limits_{i = 1}^{p_l} \theta_i^l(\mu) \, l_i(v),
+    a_\mu(u, v) = \sum\limits_{p = 1}^{p_a} \theta_p^a(\mu) \, a_p(u, v), \qquad l_\mu(v) = \sum\limits_{p = 1}^{p_l} \theta_p^l(\mu) \, l_p(v),
 \end{equation}
-where the $\theta$ are parameter functions for $a_\mu$ and $l_\mu$ respectively, the $p$ are the number of parameters for $a_\mu$ and $l_\mu$ respectively, and the $a_i$ and $l_i$ are the parameter independent components for $a_\mu$ and $l_\mu$ respectively.
+where the $\theta$ are parameter functions for $a_\mu$ and $l_\mu$ respectively, the $p$ are the number of parameters for $a_\mu$ and $l_\mu$ respectively, and the $a_p$ and $l_p$ are the parameter independent components for $a_\mu$ and $l_\mu$ respectively.
 
-With this assumption in hand, we can introduce the idea which enables RBM to repeatedly compute the solution for different parameters: the \textbf{offline-online-decomposition}.
+With this assumption in hand, we can introduce the idea which enables RBM to repeatedly compute the solution for different parameters: the \textbf{offline/online decomposition}.
 The principal idea is to first assemble the parameter independent system of equations and later only compute the parameter dependent parts for each parameter.
-In this procedure, the computationally complex assembly is done only once (\textbf{offline phase}), while the computationally faster \textit{parametrization} can be repeated multiple times (\textbf{online phase}).
-\todoinline{look up specifics for offline-online decomp!}
-\todoinline{look up better description for parametrization!}
-\todoinline{add computational complexities here!}
+In this procedure, the computationally complex assembly is done only once (\textbf{offline phase}), while the computationally faster addition of parameters can be cheaply repeated multiple times (\textbf{online phase}).
+We thus assemble
+\begin{align*}\label{OffOnComp}
+    &\mathbb{A}^{i, j}_m := a_m(\varphi_j, \varphi_i), &&\mathbb{L}^i_n := l_n(\varphi_i), \tag*{(offline)} \\
+    &\mathbb{A}(\mu) := \sum\limits_{p = 1}^{p_a} \theta_p^a(\mu)\, \mathbb{A}_p, &&\mathbb{L}(\mu) := \sum\limits_{p = 1}^{p_l} \theta_p^l(\mu)\, \mathbb{L}_p, \tag*{(online)}
+\end{align*}
+for some basis $\{ \varphi_i \; | \; 1 \leq i \leq N \}$ of the space $V_N$, $1 \leq m \leq p_a$, and $1 \leq n \leq p_l$.
+We can afterwards obtain our solution by solving the system
+\begin{equation*}\label{OnOffSystem}
+    \mathbb{A}(\mu)\, \underbar{u}_N(\mu) = \mathbb{L}(\mu), \qquad u_N(\mu) = \sum\limits_{i = 1}^N \underbar{u}_N(\mu)\, \varphi_i.
+\end{equation*}
 
-\todoinline{Write paragraph about basis selection: greedy, POD, DEIM!}
+Overall this approach via offline/online decomposition requires a complexity of $\mathcal{O}(N^2 \, p_a) + \mathcal{O}(N \, p_l) + \mathcal{O}(N^3) + \mathcal{O}(N)$, where the first two terms amount to the offline assembly, the third summand originates from solving the assembled system, and the linear term is due to the reassembly of the solution from the solution vector.
+
+One essential question in RBM is the construction of the reduced space $V_N$. For this there are multiple methods such as:
+\begin{itemize}
+    \item Greedy algorithm: construction of the reduced basis by choosing the parameter solution with the largest \textit{a posteriori} error, cf.~\cite{DeVore2013, Veroy2003},
+    \item Proper orthogonal decomposition: construction of the reduced basis by left singular values, cf.~\cite{Kunisch2001, Haasdonk2008}, and
+    \item Discrete empirical interpolation: construction of the reduced basis by finding a unisolvent set for an interpolation operator, cf.~\cite{Barrault2004, Carlberg2011, Chaturantabut2010, Drohmann2012}.
+\end{itemize}
 
 \subsection{Fr\'{e}chet and Gateaux Differentiablility}
 
