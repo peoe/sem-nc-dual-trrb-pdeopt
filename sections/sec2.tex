@@ -98,8 +98,19 @@ However, this will be covered later on in direct application to our general prob
 
 For the final component of this seminar we take a look at the trust-region method.
 The benefit of this method is that we can iteratively perform local optimizations for a simpler function than our initial objective function.
-The general procedure according to~\cite[Section 3.3]{Kelley1999} is to approximate the objective function by a quadratic model function in a region where we can trust that this approximation is of sufficient quality --- the so-called \textbf{trust-region}.
+The general procedure according to~\cite[Section 3.3]{Kelley1999} is to approximate the objective function by a quadratic model function $m_k$ in a region where we can trust that this approximation is of sufficient quality --- the so-called \textbf{trust-region}.
 
-\todoinline{Write paragraph on TR in the paper, i.e.~model function via solution functional!}
+Any such trust-region can be described by $\Delta_k := \{ x \in X \; | \; \norm{x - x_k} \leq \delta_k \}$, where $x_k$ is the sequence of points obtained from our iterative optimization procedure and $\delta_k$ is the radius of the current trust-region.
+We then optimize over the trust-region and compute the next $x_k$ as follows:
+\begin{equation*}\label{TROpti}
+    s_k := \argmin\limits_{\norm{s} \leq \delta_k} m_k(x_k + s) \qquad x_{k + 1} := x_k + s_k.
+\end{equation*}
+Afterwards, we can decide whether or not to accept this step subject to conditions depending on the individual problem such as accuracy of the underlying model function or satisfaction of other previously given constraints.
+Depending on the decision taken here, we are left with two options:
+\begin{itemize}
+    \item if the step is rejected we may decrease the trust-radius and repeat the optimization, and
+    \item if the step is accepted and a certain threshold reached we may increase the trust-radius and proceed with the next trust-region.
+\end{itemize}
+This behaviour will later be used to adaptively refine our underlying space $V_N$ and perform a TR algorithm at the same time.
 
 \todoinline{Write paragraph about BFGS in conjunction with TRM!}
