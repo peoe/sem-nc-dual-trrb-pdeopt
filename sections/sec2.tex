@@ -73,6 +73,13 @@ If furthermore the approximation
 holds for $\norm[X]{h} \rightarrow 0$, we say that $F$ is Fr\'{e}chet differentiable at $x$.
 The usual generalization to say that $F$ is G\^{a}teaux/Fr\'{e}chet differentiable if it is G\^{a}teaux/Fr\'{e}chet differentiable at every $x \in X$ also applies here.
 
+For our use case we often consider parametrized functionals, for which we get the chain rule
+\begin{align*}
+    d_\mu a_\mu(u_\mu, v_\mu) \cdot \nu &= \partial_\mu a_\mu(u_\mu, v_\mu) \cdot \nu + \partial_u a_\mu(u_\mu, v_\mu)[d_\nu u_\mu] + \partial_v a_\mu(u_\mu, v_\mu)[d_\nu v_\mu] \\
+    &= \partial_\mu a_\mu(u_\mu, v_\mu) \cdot \nu + a_\mu(d_\nu u_\mu) + a_\mu(u_\mu, d_\nu v_\mu),
+\end{align*}
+where we generally denote the derivative w.r.t.\@ to the parameter with $\partial_\mu$ and the derivative w.r.t.\@ the respective first and second argument with $\partial_u$, and $\partial_v$.
+
 For the scope of this seminar, we shall consider problems of the form
 \begin{equation}\label{OptiProb}
     \min\limits_{u \in V, \mu \in \mathcal{P}} J(u, \mu) \quad s.t. \quad e(u, \mu) = 0,
