@@ -94,6 +94,12 @@ the \textbf{state equation}.
 We can then derive a system of optimality condition for~\eqref{OptiProb}, similarly to~\cite[Section 1.7]{Hinze2009}.
 However, this will be covered later on in direct application to our general problem setting.
 
-\subsection{Trust-Region Method}
+\subsection{Trust-Region Method and BFGS}
 
-\todoinline{Write paragraph about TRM}
+For the final component of this seminar we take a look at the trust-region method.
+The benefit of this method is that we can iteratively perform local optimizations for a simpler function than our initial objective function.
+The general procedure according to~\cite[Section 3.3]{Kelley1999} is to approximate the objective function by a quadratic model function in a region where we can trust that this approximation is of sufficient quality --- the so-called \textbf{trust-region}.
+
+\todoinline{Write paragraph on TR in the paper, i.e.~model function via solution functional!}
+
+\todoinline{Write paragraph about BFGS in conjunction with TRM!}
