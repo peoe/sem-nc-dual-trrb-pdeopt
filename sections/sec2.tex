@@ -59,7 +59,7 @@ One essential question in RBM is the construction of the reduced space $V_N$. Fo
 
 We now want to introduce the idea of optimization under PDE constraints.
 This type of optimization is similar to other kinds of optimization in that we can derive certain optimality conditions reliant on the gradient and Hessian of some function or functional.
-When working with PDEs as constraints, we often have to deal with objective functionals requiring that we take care in describing how the derivatives of these functionals are defined and calculated.
+When working functionals it is required that we take care in describing how the derivatives of these functionals are defined and calculated.
 Hence we first give the definitions of \textbf{G\^{a}teaux} and \textbf{Fr\'{e}chet differentiability} in accordance with~\cite[Section 1.4]{Hinze2009}.
 
 A functional $F: X \rightarrow Y$ is called G\^{a}teaux differentiable at $x \in X$ if the directional derivative $dF(x): X \rightarrow Y, h \mapsto dF (x) [ h ]$ is a bounded and linear functional, that is $dF(x) \in \mathcal{L}(X, Y)$, where the directional derivative of $F$ at $x$ is defined by
@@ -73,9 +73,16 @@ If furthermore the approximation
 holds for $\norm[X]{h} \rightarrow 0$, we say that $F$ is Fr\'{e}chet differentiable at $x$.
 The usual generalization to say that $F$ is G\^{a}teaux/Fr\'{e}chet differentiable if it is G\^{a}teaux/Fr\'{e}chet differentiable at every $x \in X$ also applies here.
 
-\todoinline{Write paragraph about different notions of differentiability}
-
-\todoinline{Write paragraph about PDE opt}
+For the scope of this seminar, we shall consider problems of the form
+\begin{equation}\label{OptiProb}
+    \min\limits_{u \in V, \mu \in \mathcal{P}} J(u, \mu) \quad s.t. \quad e(u, \mu) = 0,
+\end{equation}
+where we consider $V$ to be some function space, and $\mathcal{P}$ to be the underlying parameter space.
+In accordance with~\cite[Subsection 1.1.1 and Equation 1.4; Section 1.6 and Equation 1.81]{Hinze2009}, we call the function $J$ the \textbf{objective function} and the equation
+\begin{equation}\label{StateEq}
+    e(u, \mu) = 0
+\end{equation}
+the \textbf{state equation}.
 
 \subsection{Trust-Region Method}
 
