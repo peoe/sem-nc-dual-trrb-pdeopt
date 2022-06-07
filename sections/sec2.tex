@@ -55,8 +55,23 @@ One essential question in RBM is the construction of the reduced space $V_N$. Fo
     \item Discrete empirical interpolation: construction of the reduced basis by finding a unisolvent set for an interpolation operator, cf.~\cite{Barrault2004, Carlberg2011, Chaturantabut2010, Drohmann2012}.
 \end{itemize}
 
-
 \subsection{PDE Constrained Optimization}
+
+We now want to introduce the idea of optimization under PDE constraints.
+This type of optimization is similar to other kinds of optimization in that we can derive certain optimality conditions reliant on the gradient and Hessian of some function or functional.
+When working with PDEs as constraints, we often have to deal with objective functionals requiring that we take care in describing how the derivatives of these functionals are defined and calculated.
+Hence we first give the definitions of \textbf{G\^{a}teaux} and \textbf{Fr\'{e}chet differentiability} in accordance with~\cite[Section 1.4]{Hinze2009}.
+
+A functional $F: X \rightarrow Y$ is called G\^{a}teaux differentiable at $x \in X$ if the directional derivative $dF(x): X \rightarrow Y, h \mapsto dF (x) [ h ]$ is a bounded and linear functional, that is $dF(x) \in \mathcal{L}(X, Y)$, where the directional derivative of $F$ at $x$ is defined by
+\begin{equation*}\label{DirDeriv}
+    dF(x)[h] := \lim\limits_{t \rightarrow 0} \frac{F(x + th) - F(x)}{t} \in Y.
+\end{equation*}
+If furthermore the approximation
+\begin{equation*}\label{FrechDeriv}
+    \norm[Y]{F(x + th) - F(x) - dF(x)[h]} = o(\norm[X]{h})
+\end{equation*}
+holds for $\norm[X]{h} \rightarrow 0$, we say that $F$ is Fr\'{e}chet differentiable at $x$.
+The usual generalization to say that $F$ is G\^{a}teaux/Fr\'{e}chet differentiable if it is G\^{a}teaux/Fr\'{e}chet differentiable at every $x \in X$ also applies here.
 
 \todoinline{Write paragraph about different notions of differentiability}
 
