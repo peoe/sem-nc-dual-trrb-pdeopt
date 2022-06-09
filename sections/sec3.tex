@@ -53,12 +53,27 @@ To extend on the result of the previous section, the NCD-corrected reduced funct
 Specifically, this involves the restriction of the Lagrangian in the dual variable.
 We get
 \begin{equation}\label{NCDFunctional}
-    \mathcal{J}_N(\mu) := \mathcal{L}(u_\mu, \mu, p_\mu) = J_n(\mu) + Res_\mu^{pr}(u_\mu)[p_\mu].
+    \mathcal{J}_N(\mu) := \mathcal{L}(u_\mu, \mu, p_\mu) = J_N(\mu) + Res_\mu^{pr}(u_\mu)[p_\mu].
 \end{equation}
 This is the functional we will be dealing with forthwith, and we define the reduced optimization problem
 \begin{equation}\label{ReducProb}
     \min\limits_{\mu \in \mathcal{P}} \mathcal{J}_N(\mu).
 \end{equation}
+
+The key insight for the coming error estimates is that the following statement (cf.~\cite[Proposition 3.3]{Keil2021}) about the gradient of~\eqref{NCDFunctional} holds true:
+\begin{proposition}\label{NCDGradientProp}
+    We have
+    \begin{equation*}\label{NCDGradient}
+        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i = \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu + w_\mu] - Res_\mu^{du}(u_\mu, p_\mu)[z_\mu],
+    \end{equation*}
+    where $z_\mu \in V_N^{du}$ and $w_\mu \in V_N^{pr}$ respectively denote the solutions to the following problems:
+    \begin{align*}\label{NCDGradientZW}
+        a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_\mu)[q] \qquad &&\forall q \in V_N^{du}, \text{ and} \\
+        a_\mu(v, w_\mu) &= Res_\mu^{du}(u_\mu, p_\mu)[v] - 2 k_\mu(z_\mu, v) \qquad &&\forall v \in V_N^{pr}.
+    \end{align*}
+\end{proposition}
+
+\todoinline{Add the prrof of this to the appendix!!!}
 
 \subsection{\textit{A posteriori} error analysis}
 
