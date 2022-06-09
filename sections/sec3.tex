@@ -67,9 +67,21 @@ The key insight for the coming error estimates is that the following statement (
         {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i = \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu + w_\mu] - Res_\mu^{du}(u_\mu, p_\mu)[z_\mu],
     \end{equation*}
     where $z_\mu \in V_N^{du}$ and $w_\mu \in V_N^{pr}$ respectively denote the solutions to the following problems:
-    \begin{align*}\label{NCDGradientZW}
+    \begin{align*}
         a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_\mu)[q] \qquad &&\forall q \in V_N^{du}, \text{ and} \\
         a_\mu(v, w_\mu) &= Res_\mu^{du}(u_\mu, p_\mu)[v] - 2 k_\mu(z_\mu, v) \qquad &&\forall v \in V_N^{pr}.
+    \end{align*}
+\end{proposition}
+
+\todoinline{Add the proof of this to the appendix!!!}
+
+Besides this classical approach we can also try and compute the gradient of the NCD-corrected functional~\eqref{NCDFunctional} by the sensitivities of the primal and dual reduced solutions (cf.~\cite[Proposition 3.9]{Keil2021}).
+Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the parameters.
+\begin{proposition}\label{NCDGradientSensProp}
+    We have
+    \begin{align*}\label{NCDGradientSens}
+        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i &= \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] \\
+        &+ Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] + Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} u_\mu].
     \end{align*}
 \end{proposition}
 
@@ -80,4 +92,4 @@ The key insight for the coming error estimates is that the following statement (
 The previous results in this section now enable us to take a look at \textit{a posteriori} error estimators.
 Most of these involve comparisons of the ROM solution to the FOM solution, so we want to reiterate the notation in that $u_\mu$ will always denote the primal solution $u$ for some parameter $\mu$ of the FOM, and similarly $p_\mu$ the dual solution of the FOM, and $u_{N, \mu}$, $p_{N, \mu}$ the respective solutions of the ROM.\@
 This part will then highlight two different approaches for obtaining the error estimates: the standard approach of RBM and the sensitivities approach.
-As~\cite{Keil2021} does, we also want to emphasize that most of these results can only be computed efficiently by means of the offline/online decomposition.
+As~\cite{Keil2021} does, we also want to emphasize that most of these results can only be computed efficiently by means of the assumption that the problems are offline/online decomposable.
