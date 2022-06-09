@@ -68,13 +68,12 @@ The key insight for the coming error estimates is that the following statement (
     \end{equation*}
     where $z_\mu \in V_N^{du}$ and $w_\mu \in V_N^{pr}$ respectively denote the solutions to the following problems:
     \begin{align*}
-        a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_\mu)[q] \qquad &&\forall q \in V_N^{du}, \text{ and} \\
-        a_\mu(v, w_\mu) &= Res_\mu^{du}(u_\mu, p_\mu)[v] - 2 k_\mu(z_\mu, v) \qquad &&\forall v \in V_N^{pr}.
+        a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_\mu)[q] &&\forall q \in V_N^{du}, \text{ and} \\
+        a_\mu(v, w_\mu) &= Res_\mu^{du}(u_\mu, p_\mu)[v] - 2 k_\mu(z_\mu, v) &&\forall v \in V_N^{pr}.
     \end{align*}
 \end{proposition}
 
 Besides this classical approach we can also try and compute the gradient of the NCD-corrected functional~\eqref{NCDFunctional} by the sensitivities of the primal and dual reduced solutions (cf.~\cite[Proposition 3.9]{Keil2021}).
-Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the parameters.
 \begin{proposition}\label{NCDGradientSensProp}
     We have
     \begin{align*}\label{NCDGradientSens}
@@ -82,6 +81,11 @@ Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the paramet
         &+ Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] + Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} u_\mu].
     \end{align*}
 \end{proposition}
+Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the parameters:
+\begin{align*}
+    a_\mu(d_\nu u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot \nu &&\forall v \in V_N^{pr}, \text{ and} \\
+    a_\mu(q, d_\nu p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot \nu + 2 k_\mu(q, d_\nu u_\mu) &&\forall q \in V_N^{du}.
+\end{align*}
 
 \subsection{\textit{A posteriori} error analysis}
 
