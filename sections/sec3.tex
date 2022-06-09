@@ -33,7 +33,7 @@ This method is practical because it enables the approximation of the exact gradi
 One particuliarity of this idea as mentioned by~\cite{Qian2017} is that we can afterwards disregard the usual offline/online paradigm during the optimization and thus adapt the reduced approximation on the fly.
 
 We note here that as mentioned in~\cite[Subsection 3.2]{Keil2021} the primal and the dual spaces are in general not the same, even the dimensions may be assumed to differ.
-Hence, for $J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu)$ when considering the gradients 
+Hence, for $J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu)$ when considering the gradients (or rather their componentwise definitions)
 \begin{align}\label{Grads}
     {\big( \nabla_\mu J_N(\mu) \big)}_i &:= \partial_u \mathcal{L}(u_\mu, \mu, p)[d_{\mu_i} u_\mu] + \partial_{\mu_i} \mathcal{L}(u_\mu, \mu, p) \qquad \forall p \in V_N^{du}, \tag*{(exact)} \\
     {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i &:= \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu], \tag*{(inexact)}
@@ -41,11 +41,9 @@ Hence, for $J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu)$ when considering the gradi
 where in the first line of equations we considered the Lagrangian for the reduced version of~\eqref{SettingOpti} and apply $J_N(\mu) = \mathcal{L}(u_\mu, \mu, p) \; \forall p \in V_N^{du}$.
 If we then consider $p = p_\mu$ in the first line and combine them with the second line we obtain
 \begin{equation*}\label{RelationGrads}
-    {\big( \nabla_\mu J_N(\mu) \big)}_i = \underbrace{\partial_u \mathcal{L}(u_\mu, \mu, p)[d_{\mu_i} u_\mu]}_{(\ast)} + {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i
+    {\big( \nabla_\mu J_N(\mu) \big)}_i = \underbrace{\partial_u \mathcal{L}(u_\mu, \mu, p)[d_{\mu_i} u_\mu]}_{(\ast)} + {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i.
 \end{equation*}
-The key insight here is that in general $(\ast) \neq 0$ because we are not actually considering all elements from $V$ for~\eqref{DualEq}.
-
-\todoinline{Write paragraph for standard approach}
+The key insight here is that in general $(\ast) \neq 0$ because we are not actually considering all elements from $V$ for~\eqref{DualEq}, but just those from the reduced dual space.
 
 \subsection{NCD-corrected Approach for a ROM Optimality System}
 
