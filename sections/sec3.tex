@@ -1,27 +1,35 @@
 \section{ROM Optimality Systems}
 
-\subsection{Primal and Dual Equation}
+In the following, we want to consider optimality conditions for the reduced problem.
+This will involve primal and dual spaces for the conditions, causing the easily computable gradients that one would usually use to derive error estimates to differ from the exact gradients.
+Only a short overview of the ideas mentioned will be given here, but a longer description can be found in~\cite[Section 3]{Keil2021}.
 
 If we consider~\eqref{StateEq} for our FOM and ROM problems~\eqref{FOMEq} and~\eqref{ROMEq}, we can see that the state equation can be restated through
 \begin{equation*}
     e(u_\mu, \mu) = l_\mu(\cdot) - a_\mu(u_\mu, \cdot) \in V' \text{ or } V_N'.
 \end{equation*}
 We now define the \textbf{primal residual} by $Res_\mu^{pr}(u)[v] := l_\mu(v) - a_\mu(u, v)$.
-Any locally optimal point for the problem~\eqref{OptiProb} hence has to satisfy
-\begin{equation}\label{PrimalEq}
-    Res_\mu^{pr}(u_\mu)[v] = 0 \qquad \forall v \in V \text{ or } V_N.
-\end{equation}
 Following~\cite[Corollary 1.3]{Hinze2009}, we get the optimality conditions in~\cite[Proposition 2.9]{Keil2021}, then derive from these the following dual relation
 \begin{equation*}
     a_\mu(v, p_\mu) = \partial_u \mathcal{J}(u_\mu, \mu)[v] = j_\mu(v) + 2 k_\mu(v, u_\mu) \quad \forall v \in V \text{ or } V_N,
 \end{equation*}
 and finally define the \textbf{dual residual} in terms of the difference in the dual optimality condition $Res_\mu^{du}(u_\mu, p_\mu)[v] := j_\mu(v) + 2 k_\mu(v, u_\mu) - a_\mu(v, p_\mu)$.
-Similarly as for~\eqref{PrimalEq}, all locally optimal points of~\eqref{OptiProb} have to satisfy
+By the same optimality conditions, all locally optimal points of~\eqref{OptiProb} have to satisfy
+\begin{equation}\label{PrimalEq}
+    Res_\mu^{pr}(u_\mu)[v] = 0 \qquad \forall v \in V \text{ or } V_N^{pr},
+\end{equation}
+and
 \begin{equation}\label{DualEq}
-    Res_\mu^{du}(u_\mu, p_\mu)[v] = 0 \qquad \forall v \in V \text{ or } V_N.
+    Res_\mu^{du}(u_\mu, p_\mu)[v] = 0 \qquad \forall v \in V \text{ or } V_N^{du}.
 \end{equation}
 
+In this and the following sections, $u_\mu$ will always denote the primal solution $u$ for some parameter $\mu$, and similarly $p_\mu$ the dual solution.
+If necessary, we will denote the ROM solutions by $u_{N, \mu}$ ($p_{N, \mu}$ respectively), while we will avoid additional indices for the FOM solutions.
+
 \subsection{Standard Approach for a ROM Optimality System}
+
+We note here that as in~\cite[Section 3.2]{Keil2021} the primal and the dual spaces are in general not the same, even the dimensions may be assumed to differ.
+Hence, when considering the exact gradient
 
 \todoinline{Write paragraph for standard approach}
 
