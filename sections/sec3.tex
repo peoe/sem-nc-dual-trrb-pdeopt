@@ -93,3 +93,24 @@ The previous results in this section now enable us to take a look at \textit{a p
 Most of these involve comparisons of the ROM solution to the FOM solution, so we want to reiterate the notation in that $u_\mu$ will always denote the primal solution $u$ for some parameter $\mu$ of the FOM, and similarly $p_\mu$ the dual solution of the FOM, and $u_{N, \mu}$, $p_{N, \mu}$ the respective solutions of the ROM.\@
 This part will then highlight two different approaches for obtaining the error estimates: the standard approach of RBM and the sensitivities approach.
 As~\cite{Keil2021} does, we also want to emphasize that most of these results can only be computed efficiently by means of the assumption that the problems are offline/online decomposable.
+
+To begin with we have the usual estimates we would expect from coercive problems.
+Proofs may be found in~\cite{Rozza2008, Qian2017}.
+\begin{align*}
+    \norm{u_\mu - u_{N, \mu}} &\leq \Delta_{pr}(\mu) := {\alpha_\mu}^{-1} \norm{Res_\mu^{pr}(u_{N, \mu})}, \text{ and} \\
+    \norm{p_\mu - p_{N, \mu}} &\leq \Delta_{du}(\mu) := {\alpha_\mu}^{-1} \big( 2 \gamma_{k_\mu} \Delta_{pr}(\mu) + \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} \big),
+\end{align*}
+where $\alpha_\mu$ denotes the coercivity constant of $a_\mu$, $\gamma_{k_\mu}$ stands for the modulus of continuity of $k_\mu$ and the norms of the residuals are to be understood as the norms of the respective linear functionals they represent.
+
+In a similar fashion, we can obtain upper bounds on the errors between the exact and inexact functionals.
+The first is a result for the simple inxeact functional courtesy of~\cite[Theorem 4]{Qian2017}, while the second is the analogous statement for the NCD-corrected functional as seen in~\cite[Proposition 3.6]{Keil2021}.
+We have
+\begin{align*}
+    \abs{\mathcal{J}(u_\mu, \mu) - J_N(\mu)} &\leq \Delta_{J_N}(\mu), \text{ and} \\
+    \abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} &\leq \Delta_{\mathcal{J}_N}(\mu),
+\end{align*}
+where we define the respective $\Delta$s as follows
+\begin{align*}
+    \Delta_{J_N}(\mu) &:= \Delta_{pr}(\mu) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} + {\Delta_{pr}(\mu)}^2 \gamma_{k_\mu} + \abs{Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}]}, \text{ and} \\
+    \Delta_{\mathcal{J}_N}(\mu) &:= \Delta_{pr}(\mu) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} + {\Delta_{pr}(\mu)}^2 \gamma_{k_\mu}.
+\end{align*}
