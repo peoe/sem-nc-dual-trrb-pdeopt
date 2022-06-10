@@ -86,6 +86,34 @@ Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the paramet
     a_\mu(d_\nu u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot \nu &&\forall v \in V_N^{pr}, \text{ and} \\
     a_\mu(q, d_\nu p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot \nu + 2 k_\mu(q, d_\nu u_\mu) &&\forall q \in V_N^{du}.
 \end{align*}
+This procedure is more efficient then the one from Proposition~\ref{NCDGradientProp} because the solutions to both equations of Proposition~\ref{NCDGradientSensProp} can be reused for every component $e_i$ whereas the ones of the former have to be solved every time.
+
+Another catching point is that the reduced sensitivities in $V_N^{pr}$ or $V_N^{du}$ must not be good approximations of the original approximations in $V$.
+To accompany these generally high dimensional sensitivities in the reduced spaces, we can take one of two approaches:
+\begin{itemize}
+    \item include the sensitivities in the corresponding reduced spaces, or
+    \item distribute the directional sensitivities to problem adapted reduced spaces.
+\end{itemize}
+Either way, we obtain $V_N^{pr, d_{\mu_i}}, V_N^{du, d_{\mu_i}} \subseteq V$.
+In analogy to Proposition~\ref{NCDGradientSensProp} we define the \textbf{approximate partial derivatives} as the solutions to
+\begin{align*}
+    a_\mu(\tilde{d}_{\mu_i} u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
+    a_\mu(q, \tilde{d}_{\mu_i} p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_\mu) &&\forall q \in V_N^{du, d_{\mu_i}}.
+\end{align*}
+From this, the definition of $\tilde{d}_{\nu} u_\mu$, and $\tilde{d}_{\nu} p_\mu$ follow in the canonical way.
+We also want to emphasize that both sensitivities conincide if $V_N^{pr} = V_N^{pr, d_{\mu_i}}$, and $V_N^{du} = V_N^{du, d_{\mu_i}}$ respectively.
+The gradient for the approximate sensitivities is defined componentwise as
+\begin{align*}
+    {\left( \tilde{\nabla}_\mu \mathcal{J}_N(\mu) \right)}_i &:= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
+    &+ Res_\mu^{pr}(u_{N, \mu})[\tilde{d}_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[\tilde{d}_{\mu_i} u_{N, \mu}].
+\end{align*}
+
+To conclude we define the residuals on $V$, which we will need later to perform the error analysis, for some $v \in V$ by
+\begin{align*}
+    Res_\mu^{pr, d_{\mu_i}}(u_\mu, d_{\mu_i} u_\mu)[v] &:= \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[v] - a_\mu(d_{\mu_i} u_\mu, v), \text{ and} \\
+    Res_\mu^{du, d_{\mu_i}}(u_\mu, p_\mu, d_{\mu_i} u_\mu, d_{\mu_i} p_\mu)[v] &:= \partial_{\mu_i} Res_\mu^{du}(u_\mu, p_\mu)[v] \\
+    + 2 k_\mu(v, d_{\mu_i} u_\mu) &- a_\mu(v, d_{\mu_i} p_\mu).
+\end{align*}
 
 \subsection{\textit{A posteriori} error analysis}
 
