@@ -181,3 +181,21 @@ The next statement follows from the arguments presented in~\cite[Proposition 3.1
 \end{proposition}
 This proposition also holds true in the analogous form for the approximate sensitivities $\tilde{d}_{\mu_i} u_{N, \mu}$, and $\tilde{d}_{\mu_i} p_{N, \mu}$.
 We then label the corresponding estimators by $\Delta_{\tilde{d}_{\mu_i} pr}(\mu)$ and $\Delta_{\tilde{d}_{\mu_i} du}(\mu)$ instead.
+
+Finally, we can now state the improved \textit{a posteriori} gradient error bound for the NCD-corrected functional.
+This follows~\cite[Proposition 3.14]{Keil2021} closely.
+\begin{proposition}\label{GoodNCDGradientProp}
+    We have
+    \begin{align*}
+        \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \norm[2]{\Delta_{\nabla \mathcal{J}_N}(\mu)},
+    \end{align*}
+    where the vector is defined by the components
+    \begin{align*}
+        {\left( \Delta_{\nabla \mathcal{J}_N}(\mu) \right)}_i &:= \gamma_{\partial_{\mu_i} k_\mu} {\Delta_{pr}(\mu)}^2 + \gamma_{a_\mu} \Delta_{d_{\mu_i} pr}(\mu) \Delta_{du}(\mu) \\
+        &+ \Delta_{pr}(\mu) \norm{Res_\mu^{du, d_{\mu_i}}(u_{N, \mu}, p_{N, \mu}, d_{\mu_i} u_{N, \mu}, d_{\mu_i} p_{N, \mu})}.
+    \end{align*}
+    The analogous assertion for the inexact quantities and estimators holds true as well.
+\end{proposition}
+
+We conclude error analysis by mentioning the second order decay of these estimators in combination with the necessity to always compute the dual norm of the sensitivity residuals (cf.~\cite{Keil2021}).
+We can now focus on applying these estimates in a trust-region method to solve problem~\eqref{ReducProb}.
