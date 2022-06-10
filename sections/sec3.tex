@@ -164,4 +164,20 @@ where the $\Delta$s are defined componentwise as follows
 Reiterating the conclusion of~\cite{Keil2021} w.r.t.\@ this estimate the second inequality in general does not provide a better estimate than the simpler inexact reduced gradient.
 Hence, we conclude the classical approach and look onward to the computation by means of sensitivities.
 
-\todoinline{Write paragraphs on the estimation via sensitivities!}
+Fpr a first sensitivity result, we take a look at the error in the primal and dual sensitivities.
+The next statement follows from the arguments presented in~\cite[Proposition 3.12, and Proposition 3.13]{Keil2021}.
+\begin{proposition}\label{PrDualSensErrProp}
+    We consider the FOM sensitivities $d_{\mu_i} u_\mu, d_{\mu_i} p_\mu \in V$ and the reduced sensitivities $d_{\mu_i} u_{N, \mu} \in V_N^{pr, d_{\mu_i}}, d_{\mu_i} p_{N, \mu} \in V_N^{du, d_{\mu_i}}$. Then we get
+    \begin{align*}
+        \norm{d_{\mu_i} u_\mu - d_{\mu_i} u_{N, \mu}} &\leq \Delta_{d_{\mu_i} pr}(\mu) \\
+        &:= {\alpha_\mu}^{-1} \left( \gamma_{\partial_{\mu_i} a_\mu} \Delta_{pr}(\mu) + \norm{Res_\mu^{pr, d_{\mu_i}}(u_{N, d_{\mu_i} u_{N, \mu}})} \right),
+    \end{align*}
+    and
+    \begin{align*}
+        \norm{d_{\mu_i} p_\mu - d_{\mu_i} p_{N, \mu}} &\leq \Delta_{d_{\mu_i} du}(\mu) \\
+        &:= {\alpha_\mu}^{-1} \left( 2 \gamma_{\partial_{\mu_i} k_\mu} \Delta_{pr}(\mu) + \gamma_{\partial_{\mu_i} a_\mu} \Delta_{du}(\mu) + 2 \gamma_{k_\mu} \Delta_{d_{\mu_i} pr}(\mu) \right) \\
+        &+ {\alpha_\mu}^{-1} \norm{Res_\mu^{du, d_{\mu_i}}(u_{N, \mu}, p_{N, \mu}, d_{\mu_i} u_{N, \mu}, d_{\mu_i} p_{N, \mu})}.
+    \end{align*}
+\end{proposition}
+This proposition also holds true in the analogous form for the approximate sensitivities $\tilde{d}_{\mu_i} u_{N, \mu}$, and $\tilde{d}_{\mu_i} p_{N, \mu}$.
+We then label the corresponding estimators by $\Delta_{\tilde{d}_{\mu_i} pr}(\mu)$ and $\Delta_{\tilde{d}_{\mu_i} du}(\mu)$ instead.
