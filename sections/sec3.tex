@@ -119,14 +119,14 @@ As mentioned by~\cite{Keil2021}, the second inequality is an improved version of
 Continuing to gradients, we get a statement about the inexact and the NCD-corrected reduced gradients in accordance with~\cite[Proposition 3.8]{Keil2021}.
 \begin{align*}
     \norm[2]{\nabla \mathcal{J}(u_\mu, \mu) - \tilde{\nabla} J_N(\mu)} &\leq \norm[2]{\Delta_{\tilde{\nabla} J_N}(\mu)}, \text{ and} \\
-    \norm[2]{\nabla \mathcal{J}(u_\mu, \mu) - \tilde{\nabla} \mathcal{J}_N(\mu)} &\leq \norm[2]{\Delta_{\nabla \mathcal{J}_N (\mu)}},
+    \norm[2]{\nabla \mathcal{J}(u_\mu, \mu) - \tilde{\nabla} \mathcal{J}_N(\mu)} &\leq \norm[2]{\Delta_{\nabla \mathcal{J}_N (\mu)}^*},
 \end{align*}
 where the $\Delta$s are defined componentwise as follows
 \begin{align*}
     {\left( \Delta_{\tilde{\nabla} J_N}(\mu) \right)}_i &:= 2 \Delta_{pr}(\mu) \gamma_{\partial_{\mu_i} k_\mu} \norm{u_{N, \mu}} + \Delta_{pr}(\mu) \left( \gamma_{\partial_{\mu_i} j_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) \\
     &+ \Delta_{du}(\mu) \left( \gamma_{\partial_{\mu_i} l_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) + \Delta_{pr}(\mu) \Delta_{du}(\mu) \gamma_{\partial_{\mu_i} a_\mu} \\
     &+ {\Delta_{pr}(\mu)}^2 \gamma_{\partial_{\mu_i} k_\mu}, \text{ and} \\
-    {\left( \Delta_{\tilde{\nabla} \mathcal{J}_N}(\mu) \right)}_i &:= 2 \Delta_{pr}(\mu) \gamma_{\partial_{\mu_i} k_\mu} \norm{u_{N, \mu}} + \Delta_{pr}(\mu) \left( \gamma_{\partial_{\mu_i} l_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) \\
+    {\left( \Delta_{\tilde{\nabla} \mathcal{J}_N}^*(\mu) \right)}_i &:= 2 \Delta_{pr}(\mu) \gamma_{\partial_{\mu_i} k_\mu} \norm{u_{N, \mu}} + \Delta_{pr}(\mu) \left( \gamma_{\partial_{\mu_i} l_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) \\
     &+ \Delta_{du}(\mu) \left( \gamma_{\partial_{\mu_i} l_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) + \Delta_{pr}(\mu) \Delta_{du}(\mu) \gamma_{\partial_{\mu_i} a_\mu} \\
     &+ {\alpha_\mu}^{-1} \left( \gamma_{\partial_{\mu_i} l_\mu} + \gamma_{\partial_{\mu_i} a_\mu} \norm{u_{N, \mu}} \right) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} \\
     &+ {\alpha_\mu}^{-1} \norm{Res_\mu^{pr}(u_{N, \mu})} \left( \gamma_{\partial_{\mu_i} j_\mu} + 2 \gamma_{\partial_{\mu_i} k_\mu} \norm{u_{N, \mu}} + \gamma_{\partial_{\mu_i} a_\mu} \norm{p_{N, \mu}} \right) \\
