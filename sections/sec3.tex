@@ -49,7 +49,7 @@ The key insight here is that in general $(\ast) \neq 0$ because we are not actua
 
 \subsection{NCD-corrected Approach for a ROM Optimality System}
 
-To extend on the result of the previous section, the NCD-corrected reduced functional in~\cite[Subsection 3.3]{Keil2021} contains one more step to attain improved error estimates.
+To extend on the result of the previous section, the \textbf{NCD-corrected reduced functional} in~\cite[Subsection 3.3]{Keil2021} contains one more step to attain improved error estimates.
 Specifically, this involves the restriction of the Lagrangian in the dual variable.
 We get
 \begin{equation}\label{NCDFunctional}
@@ -95,14 +95,14 @@ To accompany these generally high dimensional sensitivities in the reduced space
     \item distribute the directional sensitivities to problem adapted reduced spaces.
 \end{itemize}
 Either way, we obtain $V_N^{pr, d_{\mu_i}}, V_N^{du, d_{\mu_i}} \subseteq V$.
-In analogy to Proposition~\ref{NCDGradientSensProp} we define the \textbf{approximate partial derivatives} as the solutions to
+In analogy to the derivatives in Proposition~\ref{NCDGradientSensProp} we define the \textbf{approximate partial derivatives} as the solutions to
 \begin{align*}
     a_\mu(\tilde{d}_{\mu_i} u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
     a_\mu(q, \tilde{d}_{\mu_i} p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_\mu) &&\forall q \in V_N^{du, d_{\mu_i}}.
 \end{align*}
 From this, the definition of $\tilde{d}_{\nu} u_\mu$, and $\tilde{d}_{\nu} p_\mu$ follow in the canonical way.
 We also want to emphasize that both sensitivities conincide if $V_N^{pr} = V_N^{pr, d_{\mu_i}}$, and $V_N^{du} = V_N^{du, d_{\mu_i}}$ respectively.
-The gradient for the approximate sensitivities is defined componentwise as
+The \textbf{inexact gradient of the NCD-corrected functional} for the approximate sensitivities is defined componentwise as
 \begin{align*}
     {\left( \tilde{\nabla}_\mu \mathcal{J}_N(\mu) \right)}_i &:= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
     &+ Res_\mu^{pr}(u_{N, \mu})[\tilde{d}_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[\tilde{d}_{\mu_i} u_{N, \mu}].
