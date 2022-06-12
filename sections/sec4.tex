@@ -1,3 +1,24 @@
 \section{Adaptive Enrichment for Trust-Region Reduced Basis Approximation}
 
-\todoinline{Write paragraph for enrichment algorithm}
+The objective of this section is to describe the trust-region reduced basis method described in~\cite[Section 4]{Keil2021}.
+To this end we shall stick to a general description, and only mention the relevant theoretical results for convergence at the end.
+Throughout we shall choose the model function (cf. Subsection~\ref{subsec:TRRB}) to be defined as the sequence indexed by $k \geq 0$ as follows
+\begin{equation*}\label{TRModelFunc}
+    m^{(k)}(\eta) := \mathcal{J}_N(\mu^{(k)} + \eta).
+\end{equation*}
+The reduced spaces are assumed to be initialized as $V_N^{pr, 0} = \{ u_\mu \}, V_N^{du, 0} = \{ p_\mu \}$, with $u_\mu$ and $p_\mu$ being the FOM solutions for some initial guess $\mu^{(0)} \in \mathcal{P}$.
+We can then state the inexact reduced version of~\eqref{TROpti} as introduced in~\cite[Equation 51]{Qian2017}
+\begin{equation}\label{TRInexactOpti}
+    \min\limits_{s \in \mathcal{P}} \mathcal{J}_N(\mu^{(k)} + s) \quad \text{s.t.} \quad \frac{\Delta_{\mathcal{J}_N}(\mu^{(k)} + s)}{\mathcal{J}_N(\mu^{(k)} + s)} \leq \delta^{(k)},
+\end{equation}
+where the equality constraint $Res_{\mu^{(k)} + s}^{pr} (u_{N, \mu^{(k)} + s})[v] = 0$ is hidden in $\mathcal{J}_N$, and $\delta^{(k)}$ is the radius of the trust-region.
+
+\todoinline{Write paragraph for BFGS+AGC}
+
+\todoinline{Write paragraph for enlarging trust radius}
+
+\todoinline{Write paragraph for reduced space construction}
+
+\todoinline{Write down shortened version of algorithm}
+
+\todoinline{Write short remark for convergence + insights of the next paper}
