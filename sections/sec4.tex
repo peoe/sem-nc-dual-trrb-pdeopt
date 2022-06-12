@@ -13,7 +13,26 @@ We can then state the inexact reduced version of~\eqref{TROpti} as introduced in
 \end{equation}
 where the equality constraint $Res_{\mu^{(k)} + s}^{pr} (u_{N, \mu^{(k)} + s})[v] = 0$ is hidden in $\mathcal{J}_N$, and $\delta^{(k)}$ is the radius of the trust-region.
 
-\todoinline{Write paragraph for BFGS+AGC}
+For every step of the trust-region method we then have to solve the local problem via BFGS.\@
+For the first iteration we need to define the \textbf{approximate general Cauchy point} (AGC).
+This point is defined by
+\begin{equation*}\label{AGCPoint}
+    \mu_{AGC}^{(k)} := \mu^{(k, 0)}(j^{(k, 0)}) = \mathbb{P}_{\mathcal{P}} \left( \mu^{(k, 0)} + \kappa^{j^{(k, 0)}} d^{(k, 0)} \right),
+\end{equation*}
+where $\mathbb{P}_\mathcal{P}$ is the projection ${\left( \mathbb{P}_\mathcal{P}(\mu) \right)}_i := \begin{cases}
+    {(\mu_a)}_i, {(\mu)}_i \leq {(\mu_a)}_i, \\
+    {(\mu)}_i, {(\mu_a)}_i \leq {(\mu)}_i \leq {(\mu_b)}_i, \\
+    {(\mu_b)}_i, {(\mu_b)}_i \leq {(\mu)}_i,
+\end{cases}$
+mapping the parameters into the rectangular bounds $\mathcal{P}$ in analogy to the projection described in Subsection~\ref{subsec:TRRB}.
+Here the initial descent direction is $d^{(k, 0)} = - \nabla_\mu \mathcal{J}(\mu^{(k, 0)})$, and $j^{(k)}$ is the smallest integer such that the Armijo condition in~\cite[Inequality 4.4]{Keil2021} and the trust-region inequality condition from~\eqref{TRInexactOpti} (cf.~\cite[Inequality 4.5]{Keil2021}).
+We then iterate via
+\begin{align*}
+    \mu^{(k, l)}(j^{(k, l)}) &:= \mathbb{P}_\mathcal{P} \left( \mu^{(k, 0)} + \kappa^{j^{(k, l)}} d^{(k, 0)} \right), \\
+    \mu^{(k, l+ 1)} &:= \mu^{(k, l)}(j_k^{(l)})
+\end{align*}
+with this $j$ once again satisfying the same conditions for the indices $k, l$.
+After the termination condition for the BFGS method has been reached at $L$ iterations, see~\cite[Inequalities 4.6a and 4.6b]{Keil2021}, we set $\mu^{(k + 1)} := \mu^{(k, L)}$ for the next (potential) trust-region iteration.
 
 \todoinline{Write paragraph for enlarging trust radius}
 
