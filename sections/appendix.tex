@@ -3,11 +3,54 @@
 \section{Additional Proofs}\label{sec:Appendix}
 
 \begin{proof}
-    This is the proof of Proposition~\ref{NCDGradientProp}.  
-    \todoinline{Proof of Prop.~\ref{NCDGradientProp}!!!}  
+    This is the proof of Proposition~\ref{NCDGradientProp}. We shall use the shorter notation $d_{\mu_i} \mathcal{J}_N := d_\mu \mathcal{J}_N \cdot \mu_i$.
+
+    We compute using the chain rule
+    \begin{align}
+        d_{\mu_i} \mathcal{J}_N(\mu) &= \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \underbrace{\partial_u \mathcal{J}(u_\mu, \mu)[d_{\mu_i} u_\mu]}_{(I)} + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] \label{PrfGradProp}\\
+        &+ \underbrace{\left( \partial_u Res_\mu^{pr}(u_\mu)[p_\mu] \right)[d_{\mu_i} u_\mu]}_{(II)} + \underbrace{\left( \partial_v Res_\mu^{pr}(u_\mu)[p_\mu] \right)[d_{\mu_i} p_\mu]}_{(III)}. \nonumber
+    \end{align}
+    When considering the individual terms in~\eqref{PrfGradProp} we get
+    \begin{equation*}
+        (I) = j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, p_\mu),
+    \end{equation*}
+    where we made use of~\cite[Remark 2.4]{Keil2021};
+    \begin{equation*}
+        (II) = \left( \partial_u (l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu)) \right)[d_{\mu_i} u_\mu] = -a_\mu(d_{\mu_i} u_\mu, p_\mu),
+    \end{equation*}
+    because $\partial_u l_\mu \equiv 0$, and the above remark once more; and lastly
+    \begin{align*}
+        (III) &= \left( \partial_v l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu) \right)[d_{\mu_i} p_\mu] \\
+        &= l_\mu(d_{\mu_i} p_\mu) - a_\mu(u_\mu, d_{\mu_i} p_\mu) = Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu],
+    \end{align*}
+    having applied the remark a third time.
+    Summing all three terms we get
+    \begin{align}
+        (I) + (II) + (III) &= Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] \label{PrfEq1}\\
+        &+ j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, u_\mu) - a_\mu(d_{\mu_i} u_\mu, p_\mu). \nonumber
+    \end{align}
+
+    We then consider the following derivatives
+    \begin{align}
+        \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[w_\mu] &= a_\mu(d_{\mu_i} u_\mu, w_\mu) = Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} u_\mu] - 2 k_\mu(z_\mu, d_{\mu_i} u_\mu) \label{PrfEq2}\\
+        &= j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, u_\mu) - a_\mu(d_{\mu_i} u_\mu, p_\mu) - 2 k_\mu(z_\mu, d_{\mu_i} u_\mu), \nonumber
+    \end{align}
+    where in the first equality we made use of~\cite[Proposition 2.5]{Keil2021}, in the second and third we applied~\cite[Equation 3.11 and 2.5]{Keil2021} respectively;
+    \begin{align}
+        \partial_{\mu_i} Res_\mu^{du}(u_\mu, p_\mu)[z_\mu] &= a_\mu(z_\mu, d_{\mu_i} p_\mu) - 2 k_\mu(z_\mu, d_{\mu_i} u_\mu) \label{PrfEq3}\\
+        &= - Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] - 2 k_\mu(z_\mu, d_{\mu_i} u_\mu), \nonumber
+    \end{align}
+    with~\cite[Equation 2.6 and 3.10]{Keil2021}.
+    Computing $\eqref{PrfEq2}\,-\,\eqref{PrfEq3}$, we obtain
+    \begin{align}
+        (\ref{PrfEq2}) - (\ref{PrfEq3}) &= Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] + j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, u_\mu) - a_\mu(d_{\mu_i} u_\mu, p_\mu) \label{PrfEq4}\\
+        &- 2 k_\mu(z_\mu, d_{\mu_i} u_\mu) + 2 k_\mu(z_\mu, d_{\mu_i} u_\mu). \nonumber
+    \end{align}
+
+    Finally, we see that $(\ref{PrfEq1}) = (\ref{PrfEq4})$ and thus get the assertion.
 \end{proof}
 
 \begin{proof}
     This is the proof of Proposition~\ref{NCDGradientSensProp}.   
-    \todoinline{Proof of Prop.~\ref{NCDGradientSensProp}!!!} 
+    \todoinline{Proof of Prop.~\ref{NCDGradientSensProp}!!!}
 \end{proof}
