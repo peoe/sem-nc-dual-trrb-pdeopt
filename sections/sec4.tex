@@ -34,7 +34,12 @@ We then iterate via
 with this $j$ once again satisfying the same conditions for the indices $k, l$.
 After the termination condition for the BFGS method has been reached at $L$ iterations, see~\cite[Inequalities 4.6a and 4.6b]{Keil2021}, we set $\mu^{(k + 1)} := \mu^{(k, L)}$ for the next (potential) trust-region iteration.
 
-\todoinline{Write paragraph for enlarging trust radius}
+As explained in~\cite{Keil2021}, the main drawback of the trust-region algorithm is that in the standard version the trust-radius may be significantly shrunk, thus missing out on the rate of convergence for the BFGS method.
+To fix this, we define the threshold $\eta \in \interval[open right]{1}{\frac{3}{4}}$ and the criterion for enlarging the radius as proposed in~\cite[Inequality 4.7]{Keil2021} by
+\begin{equation*}\label{EnlargingCriterion}
+    \rho^{(k)} := \frac{\mathcal{J}(\mu^{(k)}) - \mathcal{J}(\mu^{(k + 1)})}{\mathcal{J}_N(\mu^{(k)}) - \mathcal{J}_N(\mu^{(k + 1)})} \geq \eta.
+\end{equation*}
+With this idea in hand, we can now formulate the adaptive trust-region algorithm in Algorithm~\ref{alg:AdaptTRRB}.
 
 \todoinline{Write paragraph for reduced space construction}
 
