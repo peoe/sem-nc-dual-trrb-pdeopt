@@ -90,4 +90,10 @@ Essentially there are two options according to~\cite{Keil2021}:
 \end{itemize}
 The latter approach has the side effect that the NCD-corrected reduced and the standard reduced functionals coincide, hence giving up all advantages we might gain from pursuing an NCD-corrected approach.
 
-\todoinline{Write short remark for convergence + insights of the next paper}
+In addition to the different ways one may construct the reduced spaces,~\cite[Subsection 4.4]{Keil2021} lists a short description of the three varying approaches including the standard approach in~\cite{Qian2017}, a semi NCD-corrected approach, and the ``fully'' NCD-corrected approach taken in~\cite{Keil2021}.
+Distinctions between these methods mostly lie in the realm of order of estimation, being distinguished only by the increased computational complexities necessary for more accurate results.
+
+To close, we shall make a few remarks on convergence of the adaptive trust-region reduced basis method.
+In general, this is based on a few assumptions such as positivity of the functional $\mathcal{J}$, and the existence of trust-radii sufficiently large but in applications these are no hard constraints, and hence can be assumed satisfied.
+It can then be shown that every accumulation point of the generated parameter sequence is an approximate first order critical point, cf.~\cite[Theorem 4.5]{Keil2021}.
+A more robust proof has been given in~\cite{Banholzer2020}, though the method described there employs a projective Newton method instead of BFGS to attain a faster local rate of convergence.
