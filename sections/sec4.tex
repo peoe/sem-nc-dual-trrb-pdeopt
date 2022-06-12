@@ -50,6 +50,14 @@ Essentially there are two options according to~\cite{Keil2021}:
 \end{itemize}
 The latter approach has the side effect that the NCD-corrected reduced and the standard reduced functionals coincide, hence giving up all advantages we might gain from pursuing an NCD-corrected approach.
 
+In addition to the different ways one may construct the reduced spaces,~\cite[Subsection 4.4]{Keil2021} lists a short description of the three varying approaches including the standard approach in~\cite{Qian2017}, a semi NCD-corrected approach, and the ``fully'' NCD-corrected approach taken in~\cite{Keil2021}.
+Distinctions between these methods mostly lie in the realm of order of estimation, being distinguished only by the increased computational complexities necessary for more accurate results.
+
+To close, we shall make a few remarks on convergence of the adaptive trust-region reduced basis method.
+In general, this is based on a few assumptions such as positivity of the functional $\mathcal{J}$, and the existence of trust-radii sufficiently large but in applications these are no hard constraints, and hence can be assumed satisfied.
+It can then be shown that every accumulation point of the generated parameter sequence is an approximate first order critical point, cf.~\cite[Theorem 4.5]{Keil2021}.
+A more robust proof has been given in~\cite{Banholzer2020}, though the method described there employs a projective Newton method instead of BFGS to attain a faster local rate of convergence.
+
 \begin{algorithm}[H]\label{alg:AdaptTRRB}
     \caption{Adaptive TR-RB Algorithm, cf.~\cite[Algorithm 1]{Keil2021}}
     \KwData{Initial guess $\mu^{(0)}$, initial trust-radius $\delta^{(0)}$, rate of change and safeguard of the radius $\beta_1, \beta_2 \in \interval[open]{0}{1}$, tolerance for enlarging the radius $\eta$, tolerances for the BFGS method and the first order critical condition (FOC) $0 <\tau_{BFGS} \leq \tau_{FOC} \ll 1$}
@@ -89,13 +97,3 @@ The latter approach has the side effect that the NCD-corrected reduced and the s
         $k := k + 1$\;
     }
 \end{algorithm}
-
-~\\
-
-In addition to the different ways one may construct the reduced spaces,~\cite[Subsection 4.4]{Keil2021} lists a short description of the three varying approaches including the standard approach in~\cite{Qian2017}, a semi NCD-corrected approach, and the ``fully'' NCD-corrected approach taken in~\cite{Keil2021}.
-Distinctions between these methods mostly lie in the realm of order of estimation, being distinguished only by the increased computational complexities necessary for more accurate results.
-
-To close, we shall make a few remarks on convergence of the adaptive trust-region reduced basis method.
-In general, this is based on a few assumptions such as positivity of the functional $\mathcal{J}$, and the existence of trust-radii sufficiently large but in applications these are no hard constraints, and hence can be assumed satisfied.
-It can then be shown that every accumulation point of the generated parameter sequence is an approximate first order critical point, cf.~\cite[Theorem 4.5]{Keil2021}.
-A more robust proof has been given in~\cite{Banholzer2020}, though the method described there employs a projective Newton method instead of BFGS to attain a faster local rate of convergence.
