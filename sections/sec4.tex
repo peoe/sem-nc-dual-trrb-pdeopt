@@ -41,7 +41,16 @@ To fix this, we define the threshold $\eta \in \interval[open right]{1}{\frac{3}
 \end{equation*}
 With this idea in hand, we can now formulate the adaptive trust-region algorithm in Algorithm~\ref{alg:AdaptTRRB}.
 
-\begin{algorithm}\label{alg:AdaptTRRB}
+One critical point in this alorithm that we have yet to cover are lines~\ref{Update1} and~\ref{Update2}.
+Here we just mentioned an update to the reduced spaces but so far have not yet specified what this means.
+Essentially there are two options according to~\cite{Keil2021}:
+\begin{itemize}
+    \item Lagrangian reduced spaces: Construct the reduced space by adding the FOM solutions directly related to the primal and dual spaces, i.e.\@ for some $\mu \in \mathcal{P}$ from the optimization $V_N^{pr, k + 1} := V_N^{pr, k} \cup \{ u_\mu \}, V_N^{du, k + 1} := V_N^{du, k} \cup \{ p_\mu \}$.
+    \item Aggregated reduced spaces: Construct the reduced space by adding both results to both spaces, i.e. $V_N^{pr, k + 1} = V_N^{du, k + 1} := V_N^{pr, k} \cup \{ u_\mu, p_\mu \}$.
+\end{itemize}
+The latter approach has the side effect that the NCD-corrected reduced and the standard reduced functionals coincide, hence giving up all advantages we might gain from pursuing an NCD-corrected approach.
+
+\begin{algorithm}[H]\label{alg:AdaptTRRB}
     \caption{Adaptive TR-RB Algorithm, cf.~\cite[Algorithm 1]{Keil2021}}
     \KwData{Initial guess $\mu^{(0)}$, initial trust-radius $\delta^{(0)}$, rate of change and safeguard of the radius $\beta_1, \beta_2 \in \interval[open]{0}{1}$, tolerance for enlarging the radius $\eta$, tolerances for the BFGS method and the first order critical condition (FOC) $0 <\tau_{BFGS} \leq \tau_{FOC} \ll 1$}
     Set $k := 0, loop\_flag := true$\;
@@ -81,14 +90,7 @@ With this idea in hand, we can now formulate the adaptive trust-region algorithm
     }
 \end{algorithm}
 
-One critical point in this alorithm that we have yet to cover are lines~\ref{Update1} and~\ref{Update2}.
-Here we just mentioned an update to the reduced spaces but so far have not yet specified what this means.
-Essentially there are two options according to~\cite{Keil2021}:
-\begin{itemize}
-    \item Lagrangian reduced spaces: Construct the reduced space by adding the FOM solutions directly related to the primal and dual spaces, i.e.\@ for some $\mu \in \mathcal{P}$ from the optimization $V_N^{pr, k + 1} := V_N^{pr, k} \cup \{ u_\mu \}, V_N^{du, k + 1} := V_N^{du, k} \cup \{ p_\mu \}$.
-    \item Aggregated reduced spaces: Construct the reduced space by adding both results to both spaces, i.e. $V_N^{pr, k + 1} = V_N^{du, k + 1} := V_N^{pr, k} \cup \{ u_\mu, p_\mu \}$.
-\end{itemize}
-The latter approach has the side effect that the NCD-corrected reduced and the standard reduced functionals coincide, hence giving up all advantages we might gain from pursuing an NCD-corrected approach.
+~\\
 
 In addition to the different ways one may construct the reduced spaces,~\cite[Subsection 4.4]{Keil2021} lists a short description of the three varying approaches including the standard approach in~\cite{Qian2017}, a semi NCD-corrected approach, and the ``fully'' NCD-corrected approach taken in~\cite{Keil2021}.
 Distinctions between these methods mostly lie in the realm of order of estimation, being distinguished only by the increased computational complexities necessary for more accurate results.
