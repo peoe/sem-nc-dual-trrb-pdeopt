@@ -4,14 +4,14 @@ The objective of this section is to describe the trust-region reduced basis meth
 To this end we shall stick to a general description, and only mention the relevant theoretical results for convergence at the end.
 Throughout we shall choose the model function (cf. Subsection~\ref{subsec:TRRB}) to be defined as the sequence indexed by $k \geq 0$ as follows
 \begin{equation*}\label{TRModelFunc}
-    m^{(k)}(\eta) := \mathcal{J}_N(\mu^{(k)} + \eta).
+    m^{(k)}(\eta) := \mathcal{J}_N{(k)}(\mu^{(k)} + \eta).
 \end{equation*}
 The reduced spaces are assumed to be initialized as $V_N^{pr, 0} = \{ u_\mu \}, V_N^{du, 0} = \{ p_\mu \}$, with $u_\mu$ and $p_\mu$ being the FOM solutions for some initial guess $\mu^{(0)} \in \mathcal{P}$.
 We can then state the inexact reduced version of~\eqref{TROpti} as introduced in~\cite[Equation 51]{Qian2017}
 \begin{equation}\label{TRInexactOpti}
-    \min\limits_{s \in \mathcal{P}} \mathcal{J}_N(\mu^{(k)} + s) \quad \text{s.t.} \quad \frac{\Delta_{\mathcal{J}_N}(\mu^{(k)} + s)}{\mathcal{J}_N(\mu^{(k)} + s)} \leq \delta^{(k)},
+    \min\limits_{s \in \mathcal{P}} \mathcal{J}_N^{(k)}(\mu^{(k)} + s) \quad \text{s.t.} \quad \frac{\Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k)} + s)}{\mathcal{J}_N^{(k)}(\mu^{(k)} + s)} \leq \delta^{(k)},
 \end{equation}
-where the equality constraint $Res_{\mu^{(k)} + s}^{pr} (u_{N, \mu^{(k)} + s})[v] = 0$ is hidden in $\mathcal{J}_N$, and $\delta^{(k)}$ is the radius of the trust-region.
+where the equality constraint $Res_{\mu^{(k)} + s}^{pr} (u_{N, \mu^{(k)} + s})[v] = 0$ is hidden in $\mathcal{J}_N^{(k)}$, and $\delta^{(k)}$ is the radius of the trust-region.
 
 For every step of the trust-region method we then have to solve the local problem via BFGS.\@
 For the first iteration we need to define the \textbf{approximate general Cauchy point} (AGC).
@@ -25,7 +25,7 @@ where $\mathbb{P}_\mathcal{P}$ is the projection ${\left( \mathbb{P}_\mathcal{P}
     {(\mu_b)}_i, {(\mu_b)}_i \leq {(\mu)}_i,
 \end{cases}$
 mapping the parameters into the rectangular bounds $\mathcal{P}$ in analogy to the projection described in Subsection~\ref{subsec:TRRB}.
-Here the initial descent direction is $d^{(k, 0)} = - \nabla_\mu \mathcal{J}(\mu^{(k, 0)})$, and $j^{(k)}$ is the smallest integer such that the Armijo condition in~\cite[Inequality 4.4]{Keil2021} and the trust-region inequality condition from~\eqref{TRInexactOpti} (cf.~\cite[Inequality 4.5]{Keil2021}).
+Here the initial descent direction is $d^{(k, 0)} = - \nabla_\mu \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$, and $j^{(k)}$ is the smallest integer such that the Armijo condition in~\cite[Inequality 4.4]{Keil2021} and the trust-region inequality condition from~\eqref{TRInexactOpti} (cf.~\cite[Inequality 4.5]{Keil2021}).
 We then iterate via
 \begin{align*}
     \mu^{(k, l)}(j^{(k, l)}) &:= \mathbb{P}_\mathcal{P} \left( \mu^{(k, 0)} + \kappa^{j^{(k, l)}} d^{(k, 0)} \right), \\
@@ -37,12 +37,50 @@ After the termination condition for the BFGS method has been reached at $L$ iter
 As explained in~\cite{Keil2021}, the main drawback of the trust-region algorithm is that in the standard version the trust-radius may be significantly shrunk, thus missing out on the rate of convergence for the BFGS method.
 To fix this, we define the threshold $\eta \in \interval[open right]{1}{\frac{3}{4}}$ and the criterion for enlarging the radius as proposed in~\cite[Inequality 4.7]{Keil2021} by
 \begin{equation*}\label{EnlargingCriterion}
-    \rho^{(k)} := \frac{\mathcal{J}(\mu^{(k)}) - \mathcal{J}(\mu^{(k + 1)})}{\mathcal{J}_N(\mu^{(k)}) - \mathcal{J}_N(\mu^{(k + 1)})} \geq \eta.
+    \rho^{(k)} := \frac{\mathcal{J}(\mu^{(k)}) - \mathcal{J}(\mu^{(k + 1)})}{\mathcal{J}_N^{(k)}(\mu^{(k)}) - \mathcal{J}_N^{(k)}(\mu^{(k + 1)})} \geq \eta.
 \end{equation*}
 With this idea in hand, we can now formulate the adaptive trust-region algorithm in Algorithm~\ref{alg:AdaptTRRB}.
 
-\todoinline{Write paragraph for reduced space construction}
+\begin{algorithm}\label{alg:AdaptTRRB}
+    \caption{Adaptive TR-RB Algorithm, cf.~\cite[Algorithm 1]{Keil2021}}
+    \KwData{Initial guess $\mu^{(0)}$, initial trust-radius $\delta^{(0)}$, rate of change and safeguard of the radius $\beta_1, \beta_2 \in \interval[open]{0}{1}$, tolerance for enlarging the radius $\eta$, tolerances for the BFGS method and the first order critical condition (FOC) $0 <\tau_{BFGS} \leq \tau_{FOC} \ll 1$}
+    Set $k := 0, loop\_flag := true$\;
+    \While{$loop\_flag$}{
+        Compute $\mu^{(k + 1)}$ by the BFGS method\;
+        \If{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+            Accept $\mu^{(k + 1)}$, update the reduced spaces at $\mu^{(k + 1)}$, and compute $\rho^{(k)}$\;
+            \If{$\rho^{(k)} \geq \eta$}{
+                Enlarge the radius $\delta^{(k + 1)} := \beta_1^{-1} \delta^{(k)}$\;
+            }
+            \Else{
+                Keep $\delta^{(k + 1)} := \delta^{(k)}$\;
+            }
+        }
+        \ElseIf{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+            Reject $\mu^{(k + 1)}$, shrink the radius $\delta^{(k + 1)} := \beta_1 \delta^{(k)}$, and go to 3\;
+        }
+        \Else{
+            Update the reduced spaces at $\mu^{(k)}$, and compute $\rho^{(k)}$\;
+            \If{$\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+                Accept $\mu^{(k + 1)}$\;
+                \If{$\rho^{(k)} \geq \eta$}{
+                    Enlarge the radius\;
+                }
+                \Else{
+                    Keep the radius\;
+                }
+            }
+            \Else{
+                Reject $\mu^{(k + 1)}$, shrink the radius, and go to 3\;
+            }
+        }
+        \If{FOC is satifisfied for $\tau_{FOC}$}{
+            $loop\_flag := false$\;
+        }
+        $k := k + 1$\;
+    }
+\end{algorithm}
 
-\todoinline{Write down shortened version of algorithm}
+\todoinline{Write paragraph for reduced space construction}
 
 \todoinline{Write short remark for convergence + insights of the next paper}
