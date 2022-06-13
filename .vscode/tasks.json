@@ -1,0 +1,62 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run pdflatex",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "biber",
+            "args": [
+                "handout.bcf"
+            ],
+            "dependsOn": [
+                "pdflatex1"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "pdflatex1",
+            "type": "shell",
+            "group": "build",
+            "command": "pdflatex",
+            "args": [
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "handout.tex"
+            ],
+            "dependsOn": [
+                "biber"
+            ]
+        },
+        {
+            "label": "biber",
+            "type": "shell",
+            "group": "build",
+            "command": "biber",
+            "args": [
+                "handout.bcf"
+            ],
+            "dependsOn": [
+                "pdflatex2"
+            ]
+        },
+        {
+            "label": "pdflatex2",
+            "type": "shell",
+            "group": "build",
+            "command": "pdflatex",
+            "args": [
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "handout.tex"
+            ]
+        }
+    ],
+    "presentation": {
+        "reveal": "silent",
+        "clear": true
+    }
+}
