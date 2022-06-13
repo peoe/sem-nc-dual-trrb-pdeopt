@@ -14,6 +14,10 @@
 		"**/*.bcf": true,
 		"**/*.xml": true,
 		"**/*.blg": true,
-		".vscode": true
+		".vscode": true,
+		"**/*.nav": true,
+		"**/*.out": true,
+		"**/*.snm": true,
+		"**/*.toc": true
 	}
 }
