@@ -10,7 +10,7 @@
             },
             "command": "biber",
             "args": [
-                "handout.bcf"
+                "pres.bcf"
             ],
             "dependsOn": [
                 "pdflatex1"
@@ -25,7 +25,7 @@
             "args": [
                 "-interaction=nonstopmode",
                 "-file-line-error",
-                "handout.tex"
+                "pres.tex"
             ],
             "dependsOn": [
                 "biber"
@@ -37,7 +37,7 @@
             "group": "build",
             "command": "biber",
             "args": [
-                "handout.bcf"
+                "pres.bcf"
             ],
             "dependsOn": [
                 "pdflatex2"
@@ -51,7 +51,7 @@
             "args": [
                 "-interaction=nonstopmode",
                 "-file-line-error",
-                "handout.tex"
+                "pres.tex"
             ]
         }
     ],
