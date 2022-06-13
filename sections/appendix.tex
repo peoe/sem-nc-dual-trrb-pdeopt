@@ -11,18 +11,18 @@
         &+ \underbrace{\left( \partial_u Res_\mu^{pr}(u_\mu)[p_\mu] \right)[d_{\mu_i} u_\mu]}_{(II)} + \underbrace{\left( \partial_v Res_\mu^{pr}(u_\mu)[p_\mu] \right)[d_{\mu_i} p_\mu]}_{(III)}. \nonumber
     \end{align}
     When considering the individual terms in~\eqref{PrfGradProp} we get
-    \begin{equation*}
-        (I) = j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, p_\mu),
-    \end{equation*}
+    \begin{equation}
+        (I) = j_\mu(d_{\mu_i} u_\mu) + 2 k_\mu(d_{\mu_i} u_\mu, p_\mu),\label{PrfEqBoth1}
+    \end{equation}
     where we made use of~\cite[Remark 2.4]{Keil2021};
-    \begin{equation*}
-        (II) = \left( \partial_u (l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu)) \right)[d_{\mu_i} u_\mu] = -a_\mu(d_{\mu_i} u_\mu, p_\mu),
-    \end{equation*}
+    \begin{equation}
+        (II) = \left( \partial_u (l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu)) \right)[d_{\mu_i} u_\mu] = -a_\mu(d_{\mu_i} u_\mu, p_\mu),\label{PrfEqBoth2}
+    \end{equation}
     because $\partial_u l_\mu \equiv 0$, and the above remark once more; and lastly
-    \begin{align*}
-        (III) &= \left( \partial_v l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu) \right)[d_{\mu_i} p_\mu] \\
-        &= l_\mu(d_{\mu_i} p_\mu) - a_\mu(u_\mu, d_{\mu_i} p_\mu) = Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu],
-    \end{align*}
+    \begin{align}
+        (III) &= \left( \partial_v l_\mu(p_\mu) - a_\mu(u_\mu, p_\mu) \right)[d_{\mu_i} p_\mu] \label{PrfEqBoth3}\\
+        &= l_\mu(d_{\mu_i} p_\mu) - a_\mu(u_\mu, d_{\mu_i} p_\mu) = Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu], \nonumber
+    \end{align}
     having applied the remark a third time.
     Summing all three terms we get
     \begin{align}
@@ -51,6 +51,8 @@
 \end{proof}
 
 \begin{proof}
-    This is the proof of Proposition~\ref{NCDGradientSensProp}.   
-    \todoinline{Proof of Prop.~\ref{NCDGradientSensProp}!!!}
+    This is the proof of Proposition~\ref{NCDGradientSensProp}.
+    We once again use the notation introduced in the previous proof.
+    
+    We consider~\eqref{PrfEq1} and see that~\eqref{PrfEqBoth3} is equal to the primal residual part of the assertion, and that~\eqref{PrfEqBoth1} as well as~\eqref{PrfEqBoth2} add up to the dual residual part --- hence showing the assertion.
 \end{proof}
