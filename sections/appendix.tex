@@ -83,13 +83,23 @@
         (II) &= j_\mu(d_{\mu_i} u_{N, \mu}) + 2 k_\mu(d_{\mu_i} e_\mu^{pr}) \label{PrfEq7}\\
         &- j_\mu(d_{\mu_i} u_{N, \mu}) - a_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{du}). \nonumber
     \end{align}
-    We then add up all terms from~\eqref{PrfEq5},~\eqref{PrfEq6}, and~\eqref{PrfEq7} and with
+    We then add up all terms from~\eqref{PrfEq5},~\eqref{PrfEq6} and~\eqref{PrfEq7}, and with the use of
     \begin{align*}
-        asfd, \text{ and} \\
-        qwer
+        \partial_{\mu_i} k_\mu(e_\mu^{pr}, e_\mu^{pr}) &= \partial_{\mu_i} k_\mu(e_\mu^{pr}, u_\mu) + \partial_{\mu_i} k_\mu(e_\mu^{pr}, u_{N, \mu}) - 2 \partial_{\mu_i} k_\mu(e_\mu^{pr}, u_{N, \mu}) \\
+        &+ \partial_{\mu_i} k_\mu(u_\mu, u_{N, \mu}) - \partial_{\mu_i} k_\mu(u_\mu, u_{N, \mu}) \\
+        &= \partial_{\mu_i} k_\mu(u_\mu, u_\mu) - \partial_{\mu_i} k_\mu(u_{N, \mu}, u_{N, \mu}) - 2 \partial_{\mu_i} k_\mu(e_\mu^{pr}, u_{N, \mu}),
+    \end{align*}
+    and
+    \begin{align*}
+        \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] &- \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
+        &= \partial_{\mu_i} l_\mu(e_\mu^{pr}) - \partial_{\mu_i} a_\mu(u_\mu, p_\mu) + \partial_{\mu_i} a_\mu(u_{N, \mu}, p_{N, \mu}) \\
+        &= \partial_{\mu_i} a_\mu(u_{N, \mu}, p_{N, \mu}) - \partial_{\mu_i} a_\mu(u_\mu, p_\mu) + \partial_{\mu_i} a_\mu(u_\mu, e_\mu^{du}) \\
+        &+ \underbrace{\partial_{\mu_i} l_\mu(e_\mu^{du}) - \partial_{\mu_i} a_\mu(u_\mu, e_\mu^{du})}_{= \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[e_\mu^{du}]}
     \end{align*}
     we get
-    \begin{align}
-        asdf.
-    \end{align}
+    \begin{align*}
+        {\left( \nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu) \right)}_i &= \partial_{\mu_i} k_\mu(e_\mu^{pr}, e_\mu^{pr}) + a_\mu(d_{\mu_i} u_\mu, e_\mu^{du}) - a_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{du}) \\
+        &+ Res_\mu^{du, d_{\mu_i}}(u_{N, \mu}, p_{N, \mu}, d_{\mu_i} u_{N, \mu}, d_{\mu_i} p_{N, \mu})[e_\mu^{pr}],
+    \end{align*}
+    and thus the assertion.
 \end{proof}
