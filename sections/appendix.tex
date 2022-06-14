@@ -71,4 +71,14 @@
         &+ \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] - \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \nonumber\\
         &+ \underbrace{Res_\mu^{pr}(e_\mu^{pr})[d_{\mu_i} p_{N, \mu}]}_{(I)} + \underbrace{Res_\mu^{du}(e_\mu^{pr}, e_\mu^{du})[d_{\mu_i} p_{N, \mu}]}_{(II)}. \nonumber
     \end{align}
+    Applying the definitions of the residuals and adding terms we see that
+    \begin{align}
+        (I) &= \underbrace{l_\mu(d_{\mu_i} p_{N, \mu}) - l_\mu(d_{\mu_i} p_{N, \mu})}_{= 0} - a_\mu(e_\mu^{pr}, d_{\mu_i} p_{N, \mu}) \label{PrfEq6}\\
+        &+ \partial_{\mu_i} Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[e_\mu^{pr}] + 2 k_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{pr}) \nonumber\\
+        &- \partial_{\mu_i} Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[e_\mu^{pr}] - 2 k_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{pr}) \nonumber\\
+        &= Res_\mu^{du, d_{\mu_i}}(u_{N, \mu}, p_{N, \mu}, d_{\mu_i} u_{N, \mu}, d_{\mu_i} p_{N, \mu})[e_\mu^{pr}] \nonumber\\
+        &- \partial_{\mu_i} Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[e_\mu^{pr}] - 2 k_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{pr}), \nonumber\\
+        (II) &= j_\mu(d_{\mu_i} u_{N, \mu}) + 2 k_\mu(d_{\mu_i} e_\mu^{pr}) \label{PrfEq7}\\
+        &- j_\mu(d_{\mu_i} u_{N, \mu}) - a_\mu(d_{\mu_i} u_{N, \mu}, e_\mu^{du}). \nonumber
+    \end{align}
 \end{proof}
