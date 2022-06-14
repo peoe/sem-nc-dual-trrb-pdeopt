@@ -59,5 +59,16 @@
 
 \begin{proof}
     This is the proof of Proposition~\ref{GoodNCDGradientProp}.
-    \todoinline{Add proof!}
+    We once again use the notation of the previous two proofs, and $e_\mu^{pr} := u_\mu - u_{N, \mu}, e_\mu^{du} := p_\mu - p_{N, \mu}$.
+
+    We use the fact that by~\cite[Equations 3.1 and 3.2]{Keil2021} a FOM solution $u_\mu$ satisfies $Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_{N, \mu}] = 0$ and $Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} u_{N, \mu}] = 0$ to get
+    \begin{align}
+        {\left( \nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu) \right)}_i &= \partial_{\mu_i} j_\mu(e_\mu^{pr}) + \partial_{\mu_i} k_\mu(u_\mu, u_\mu) - \partial_{\mu_i} k_\mu(u_{N, \mu}, u_{N, \mu}) \label{PrfEq5}\\
+        &+ \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] - \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \nonumber\\
+        &- Res_\mu^{pr}(u_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_{N, \mu}] \nonumber\\
+        &- Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} p_{N, \mu}] \nonumber\\
+        &= \partial_{\mu_i} j_\mu(e_\mu^{pr}) + \partial_{\mu_i} k_\mu(u_\mu, u_\mu) - \partial_{\mu_i} k_\mu(u_{N, \mu}, u_{N, \mu}) \nonumber\\
+        &+ \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] - \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \nonumber\\
+        &+ Res_\mu^{pr}(e_\mu^{pr})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(e_\mu^{pr}, e_\mu^{du})[d_{\mu_i} p_{N, \mu}]. \nonumber
+    \end{align}
 \end{proof}
