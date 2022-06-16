@@ -1,3 +1,98 @@
 \section{General Overview}
 
-\frame{\cite{Keil2021}}
+\begin{frame}{Parametrized Partial Differential Equations}
+
+    \begin{block}{Problem Description}
+        For a rectangular parameter space
+        \begin{equation*}
+            \mathcal{P} := \{ \mu \in \mathbb{R}^d \; | \; {(\mu_a)}_i \leq \mu_i \leq {(\mu_b)}_i, i = 1, \dots, d \}
+        \end{equation*}
+        find a solution $u \in V$ for
+        \begin{equation*}
+            a_\mu(u, v) = l_\mu(v) \qquad \forall v \in V,
+        \end{equation*}
+        where
+        \begin{itemize}
+            \item $a_\mu$: continuous, coercive, bilinear
+            \item $l_\mu$: continuous, linear
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Optimization over Parameter Domain}
+    \begin{block}{Cost Functional}
+        Optimize some functional
+        \begin{equation*}
+            \mathcal{J}(u, \mu)
+        \end{equation*}
+        over the parameter space $\mathcal{P}$.
+    \end{block}
+
+    \only<2>{
+        In our case the quadratic cost functional
+        \begin{equation*}
+            \mathcal{J}(u, \mu) := \Theta(\mu) + j_\mu(u) + k_\mu(u, u),
+        \end{equation*}
+        where
+        \begin{itemize}
+            \item $k_\mu$: continuous, symmetric, bilinear
+            \item $j_\mu$: continuous, linear
+            \item $\Theta$: arbitrary parameter function
+        \end{itemize}
+    }
+\end{frame}
+
+\begin{frame}{Adaptive Approach}
+    \begin{block}{Idea}
+        Approximate the solution to our pPDE locally, and optimize until this model is no longer sufficient; optionally refine the model.
+    \end{block}
+
+    \only<2>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{some condition}{
+                    Continue to next optimization step\;
+                }
+                \Else{
+                    Change some parameter of the problem\;
+                    Optimize again\;
+                }
+            }
+        \end{algorithm}
+    }
+
+    \only<3>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{some condition}{
+                    Do not refine\;
+                }
+                \ElseIf{some other condition}{
+                    Do refine\;
+                }
+            }
+        \end{algorithm}
+    }
+
+    \only<4>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{some condition}{
+                    Continue witout refining\;
+                }
+                \ElseIf{some other condition}{
+                    Continue after refining\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+\end{frame}
