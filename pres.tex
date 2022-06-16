@@ -1,4 +1,5 @@
-\documentclass[inverse, prinz]{beamer}
+\documentclass{beamer}
+\usetheme{Antibes}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
@@ -34,5 +35,16 @@
 \begin{document}
     \frame{\titlepage}
 
-    \frame{~\cite{Keil2021}}
+    \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents
+    \end{frame}
+
+    \input{sections/sec1.tex}
+
+    \input{sections/sec2.tex}
+
+    \input{sections/sec3.tex}
+
+    \input{sections/sec4.tex}
 \end{document}
