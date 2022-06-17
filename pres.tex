@@ -9,6 +9,7 @@
 \usepackage[ruled, noline, noend]{algorithm2e}
 \usepackage{xcolor}
 \usepackage{subfig}
+\usepackage{graphicx}
 
 % bibliography
 \usepackage[
@@ -33,7 +34,13 @@
 \date{24.06.2022}
 
 \begin{document}
-    \frame{\titlepage}
+    \frame{
+        \titlepage{}
+        \begin{figure}
+            \centering
+            \includegraphics[scale=0.3]{qr}
+        \end{figure}
+    }
 
     \begin{frame}
         \frametitle{Outline}
@@ -48,7 +55,6 @@
 
     \input{sections/sec4.tex}
 
-    \addcontentsline{toc}{section}{References}
     \printbibliography{}
 
     \begin{frame}{Discussion}
