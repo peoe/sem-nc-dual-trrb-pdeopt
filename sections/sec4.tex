@@ -4,7 +4,7 @@ The objective of this section is to describe the trust-region reduced basis meth
 To this end we shall stick to a general description, and only mention the relevant theoretical results for convergence at the end.
 Throughout we shall choose the model function (cf. Subsection~\ref{subsec:TRRB}) to be defined as the sequence indexed by $k \geq 0$ as follows
 \begin{equation*}\label{TRModelFunc}
-    m^{(k)}(\eta) := \mathcal{J}_N{(k)}(\mu^{(k)} + \eta).
+    m^{(k)}(\eta) := \mathcal{J}_N^{(k)}(\mu^{(k)} + \eta).
 \end{equation*}
 The reduced spaces are assumed to be initialized as $V_N^{pr, 0} = \{ u_\mu \}, V_N^{du, 0} = \{ p_\mu \}$, with $u_\mu$ and $p_\mu$ being the FOM solutions for some initial guess $\mu^{(0)} \in \mathcal{P}$.
 We can then state the inexact reduced version of~\eqref{TROpti} as introduced in~\cite[Equation 51]{Qian2017}

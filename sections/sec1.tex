@@ -11,13 +11,12 @@ where the inequalities are to be considered componentwise, we consider for a rea
     \min\limits_{(u, \mu) \in V \times \mathcal{P}} \mathcal{J}(u, \mu) \quad s.t. \quad a_\mu(u, v) = l_\mu(v) \quad \forall v \in V.
 \end{equation}
 
-Here $\mathcal{J}$ is a quadratic cost functional defined by the continuous, symmetric, bilinear form $k_\mu$, a continuous, linear functional $j_\mu$, and some parameter function $\Theta$ through
+Here $a_\mu$ is a continuous, coercive, bilinear form, and $l_\mu$ is a continuous, linear functional; and $\mathcal{J}$ is a quadratic cost functional defined by the continuous, symmetric, bilinear form $k_\mu$, a continuous, linear functional $j_\mu$, and some parameter function $\Theta$ through
 \begin{equation*}
-    \mathcal{J}(u, \mu) := k_\mu(u, u) + j_\mu(u) + \Theta(\mu);
+    \mathcal{J}(u, \mu) := k_\mu(u, u) + j_\mu(u) + \Theta(\mu).
 \end{equation*}
-$a_\mu$ is a continuous, coercive, bilinear form; and $l_\mu$ is a continuous, linear functional.
 
-To tackle this problem in a repeatable manner, an adaptive trust-region method is employed on a reduced basis model working with a non-conforming dual basis approach.
+To tackle this problem in a repeatable manner, an adaptive trust-region method is employed on a reduced basis model working with a non-conforming dual (NCD) basis approach.
 The advantages of this procedure are:
 \begin{itemize}
     \item higher accuracy of approximations in contrast to conforming methods, and

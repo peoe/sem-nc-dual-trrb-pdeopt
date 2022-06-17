@@ -25,8 +25,8 @@ and
     Res_\mu^{du}(u_\mu, p_\mu)[v] = 0 \qquad \forall v \in V \text{ or } V_N^{du}.
 \end{equation}
 
-In this and the following sections, $u_\mu$ will always denote the primal solution $u$ for some parameter $\mu$, and similarly $p_\mu$ the dual solution.
-If necessary, we will denote the ROM solutions by $u_{N, \mu}$ ($p_{N, \mu}$ respectively), while we will avoid additional indices for the FOM solutions.
+In this and the following sections, $u_\mu \in V$ will always denote the primal solution $u$ for some parameter $\mu$, and similarly $p_\mu \in V$ the dual solution.
+If necessary, we will denote the ROM solutions by $u_{N, \mu} \in V_N^{pr}$ ($p_{N, \mu} \in V_N^{du}$ respectively), while we will avoid additional indices for the FOM solutions.
 
 \subsection{Standard Approach for a ROM Optimality System}
 
@@ -35,15 +35,18 @@ This method is practical because it enables the approximation of the exact gradi
 One particuliarity of this idea as mentioned by~\cite{Qian2017} is that we can afterwards disregard the usual offline/online paradigm during the optimization and thus adapt the reduced approximation on the fly.
 
 We note here that as mentioned in~\cite[Subsection 3.2]{Keil2021} the primal and the dual spaces are in general not the same, even the dimensions may be assumed to differ.
-Hence, for the reduced functional $J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu)$, when considering the gradients (or rather their componentwise definitions) we get
-\begin{align}\label{Grads}
-    {\big( \nabla_\mu J_N(\mu) \big)}_i &:= \partial_u \mathcal{L}(u_\mu, \mu, p)[d_{\mu_i} u_\mu] + \partial_{\mu_i} \mathcal{L}(u_\mu, \mu, p) \qquad \forall p \in V_N^{du}, \tag*{(exact)} \\
-    {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i &:= \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu], \tag*{(inexact)}
+Hence, for the \textbf{reduced functional} $J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu)$, when considering the gradient (or rather its componentwise definition) we get
+\begin{align}\label{Grad}
+    {\big( \nabla_\mu J_N(\mu) \big)}_i &:= \partial_u \mathcal{L}(u_{N, \mu}, \mu, p)[d_{\mu_i} u_{N, \mu}] + \partial_{\mu_i} \mathcal{L}(u_{N, \mu}, \mu, p) \qquad \forall p \in V_N^{du}, \tag*{(exact)}
 \end{align}
-where in the first line of equations we considered the Lagrangian for the reduced version of~\eqref{SettingOpti} and apply $J_N(\mu) = \mathcal{L}(u_\mu, \mu, p) \; \forall p \in V_N^{du}$.
-If we then consider $p = p_\mu$ in the first line and combine them with the second line we obtain
+and defining the \textbf{inexcat gradient} we have
+\begin{align}
+    {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i &:= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}], \tag*{(inexact)}
+\end{align}
+where in the exact gradient we considered the Lagrangian for the reduced version of~\eqref{SettingOpti} and apply $J_N(\mu) = \mathcal{L}(u_{N, \mu}, \mu, p) \; \forall p \in V_N^{du}$.
+If we then consider $p = p_{N, \mu}$ in the first line and combine them with the second line we obtain
 \begin{equation*}\label{RelationGrads}
-    {\big( \nabla_\mu J_N(\mu) \big)}_i = \underbrace{\partial_u \mathcal{L}(u_\mu, \mu, p)[d_{\mu_i} u_\mu]}_{(\ast)} + {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i.
+    {\big( \nabla_\mu J_N(\mu) \big)}_i = \underbrace{\partial_u \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu})[d_{\mu_i} u_{N, \mu}]}_{(\ast)} + {\big( \tilde{\nabla}_\mu J_N(\mu) \big)}_i.
 \end{equation*}
 The key insight here is that in general $(\ast) \neq 0$ because we are not actually considering all elements from $V$ for~\eqref{DualEq}, but just those from the reduced dual space.
 
@@ -53,7 +56,7 @@ To extend on the result of the previous section, the \textbf{NCD-corrected reduc
 Specifically, this involves the restriction of the Lagrangian in the dual variable.
 We get
 \begin{equation}\label{NCDFunctional}
-    \mathcal{J}_N(\mu) := \mathcal{L}(u_\mu, \mu, p_\mu) = J_N(\mu) + Res_\mu^{pr}(u_\mu)[p_\mu].
+    \mathcal{J}_N(\mu) := \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu}) = J_N(\mu) + Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}].
 \end{equation}
 This is the functional we will be dealing with forthwith, and we define the reduced optimization problem
 \begin{equation}\label{ReducProb}
@@ -64,12 +67,12 @@ The key insight for the coming error estimates is that the following statement (
 \begin{proposition}\label{NCDGradientProp}
     We have
     \begin{equation*}\label{NCDGradient}
-        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i = \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu + w_\mu] - Res_\mu^{du}(u_\mu, p_\mu)[z_\mu],
+        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i = \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu} + w_\mu] - Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[z_\mu],
     \end{equation*}
     where $z_\mu \in V_N^{du}$ and $w_\mu \in V_N^{pr}$ respectively denote the solutions to the following problems:
     \begin{align*}
-        a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_\mu)[q] &&\forall q \in V_N^{du}, \text{ and} \\
-        a_\mu(v, w_\mu) &= Res_\mu^{du}(u_\mu, p_\mu)[v] - 2 k_\mu(z_\mu, v) &&\forall v \in V_N^{pr}.
+        a_\mu(z_\mu, q) &= -Res_\mu^{pr}(u_{N, \mu})[q] &&\forall q \in V_N^{du}, \text{ and} \\
+        a_\mu(v, w_\mu) &= Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[v] - 2 k_\mu(z_\mu, v) &&\forall v \in V_N^{pr}.
     \end{align*}
 \end{proposition}
 
@@ -77,14 +80,14 @@ Besides this classical approach we can also try and compute the gradient of the 
 \begin{proposition}\label{NCDGradientSensProp}
     We have
     \begin{align*}\label{NCDGradientSens}
-        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i &= \partial_{\mu_i} \mathcal{J}(u_\mu, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_\mu)[p_\mu] \\
-        &+ Res_\mu^{pr}(u_\mu)[d_{\mu_i} p_\mu] + Res_\mu^{du}(u_\mu, p_\mu)[d_{\mu_i} u_\mu].
+        {\big( \nabla_\mu \mathcal{J}_N(\mu) \big)}_i &= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
+        &+ Res_\mu^{pr}(u_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[d_{\mu_i} u_{N, \mu}].
     \end{align*}
 \end{proposition}
 Here, sensitivities mean the derivatives of these solutions w.r.t.\@ the parameters:
 \begin{align*}
-    a_\mu(d_\nu u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot \nu &&\forall v \in V_N^{pr}, \text{ and} \\
-    a_\mu(q, d_\nu p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot \nu + 2 k_\mu(q, d_\nu u_\mu) &&\forall q \in V_N^{du}.
+    a_\mu(d_\nu u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot \nu &&\forall v \in V_N^{pr}, \text{ and} \\
+    a_\mu(q, d_\nu p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot \nu + 2 k_\mu(q, d_\nu u_{N, \mu}) &&\forall q \in V_N^{du}.
 \end{align*}
 This procedure is more efficient then the one from Proposition~\ref{NCDGradientProp} because the solutions to both equations of Proposition~\ref{NCDGradientSensProp} can be reused for every component $e_i$ whereas the ones of the former have to be solved every time.
 
@@ -97,10 +100,10 @@ To accompany these generally high dimensional sensitivities in the reduced space
 Either way, we obtain $V_N^{pr, d_{\mu_i}}, V_N^{du, d_{\mu_i}} \subseteq V$.
 In analogy to the derivatives in Proposition~\ref{NCDGradientSensProp} we define the \textbf{approximate partial derivatives} as the solutions to
 \begin{align*}
-    a_\mu(\tilde{d}_{\mu_i} u_\mu, v) &= \partial_\mu Res_\mu^{pr}(u_\mu)[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
-    a_\mu(q, \tilde{d}_{\mu_i} p_\mu) &= \partial_\mu Res_\mu^{du}(u_\mu, p_\mu)[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_\mu) &&\forall q \in V_N^{du, d_{\mu_i}}.
+    a_\mu(\tilde{d}_{\mu_i} u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
+    a_\mu(q, \tilde{d}_{\mu_i} p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_{N, \mu}) &&\forall q \in V_N^{du, d_{\mu_i}}.
 \end{align*}
-From this, the definition of $\tilde{d}_{\nu} u_\mu$, and $\tilde{d}_{\nu} p_\mu$ follow in the canonical way.
+From this, the definition of $\tilde{d}_{\nu} u_{N, \mu}$, and $\tilde{d}_{\nu} p_{N, \mu}$ follow in the canonical way.
 We also want to emphasize that both sensitivities conincide if $V_N^{pr} = V_N^{pr, d_{\mu_i}}$, and $V_N^{du} = V_N^{du, d_{\mu_i}}$ respectively.
 The \textbf{inexact gradient of the NCD-corrected functional} for the approximate sensitivities is defined componentwise as
 \begin{align*}
@@ -129,6 +132,7 @@ Proofs may be found in~\cite{Rozza2008, Qian2017}.
     \norm{p_\mu - p_{N, \mu}} &\leq \Delta_{du}(\mu) := {\alpha_\mu}^{-1} \big( 2 \gamma_{k_\mu} \Delta_{pr}(\mu) + \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} \big),
 \end{align*}
 where $\alpha_\mu$ denotes the coercivity constant of $a_\mu$, $\gamma_{k_\mu}$ stands for the modulus of continuity of $k_\mu$ and the norms of the residuals are to be understood as the norms of the respective linear functionals they represent.
+Similar notations shall be used henceforth.
 
 In a similar fashion, we can obtain upper bounds on the errors between the exact and reduced functionals.
 The first is a result for the simple inexact functional courtesy of~\cite[Theorem 4]{Qian2017}, while the second is the analogous statement for the NCD-corrected functional as seen in~\cite[Proposition 3.6]{Keil2021}.
@@ -164,7 +168,7 @@ where the $\Delta$s are defined componentwise as follows
 Reiterating the conclusion of~\cite{Keil2021} w.r.t.\@ this estimate the second inequality in general does not provide a better estimate than the simpler inexact reduced gradient.
 Hence, we conclude the classical approach and look onward to the computation by means of sensitivities.
 
-Fpr a first sensitivity result, we take a look at the error in the primal and dual sensitivities.
+For a first sensitivity result, we take a look at the error in the primal and dual sensitivities.
 The next statement follows from the arguments presented in~\cite[Proposition 3.12, and Proposition 3.13]{Keil2021}.
 \begin{proposition}\label{PrDualSensErrProp}
     We consider the FOM sensitivities $d_{\mu_i} u_\mu, d_{\mu_i} p_\mu \in V$ and the reduced sensitivities $d_{\mu_i} u_{N, \mu} \in V_N^{pr, d_{\mu_i}}, d_{\mu_i} p_{N, \mu} \in V_N^{du, d_{\mu_i}}$. Then we get
