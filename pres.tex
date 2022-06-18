@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usetheme{Antibes}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -28,18 +28,27 @@
 \setbeamertemplate{navigation symbols}{}
 
 % title page
-\title{asdfweq}
-\subtitle{Seminar}
+\title{A Non-Conforming Dual Approach for Adaptive Trust-Region Reduced Basis Approximation of PDE-Constrained Parameter Optimization}
+\subtitle{Seminar Advanced Numerical Methods and Applications}
 \author{Peter Oehme}
 \date{24.06.2022}
 
 \begin{document}
     \frame{
         \titlepage{}
-        \begin{figure}
-            \centering
-            \includegraphics[scale=0.3]{qr}
-        \end{figure}
+    }
+
+    \frame{
+        \frametitle{Download Handout and Slides}
+        \begin{columns}
+            \column{0.5\linewidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[scale=0.6]{qr}
+                \end{figure}
+            \column{0.5\linewidth}
+                Alternatively: \href{https://github.com/peoe/sem-nc-dual-trrb-pdeopt}{github.com/peoe/sem-nc-dual-trrb-pdeopt}
+        \end{columns}
     }
 
     \begin{frame}
@@ -60,6 +69,6 @@
     \printbibliography{}
 
     \begin{frame}{Discussion}
-        \center{Thank you for your attention! \\~\\ Questions?}
+        \center{\Huge{Thank you for your attention! \\~\\ Questions?}}
     \end{frame}
 \end{document}
