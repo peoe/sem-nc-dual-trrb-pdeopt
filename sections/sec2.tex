@@ -3,8 +3,12 @@
 \subsection{Reduced Basis Method}
 
 \begin{frame}{Full Order Model}
-    % todo equation for FOM
-    wqwer
+    \begin{block}{Standard Finite Element Formulation}
+        For a finite element space find $u \in V$ such that
+        \begin{equation*}
+            a_\mu(u, v) = l_\mu(v) \quad \forall v \in V
+        \end{equation*}
+    \end{block}
 \end{frame}
 
 \begin{frame}{Reduced Basis Method}
@@ -33,12 +37,82 @@
 \end{frame}
 
 \begin{frame}{Comparison FEM/RBM}
-    % todo comparison for some problem
-    asdf
+    \begin{block}{FE Formulation}
+        For a finite element space find $u \in V$ such that
+        \begin{equation*}
+            a_\mu(u, v) = l_\mu(v) \quad \forall v \in V
+        \end{equation*}
+    \end{block}
+
+    \begin{block}{RB Formulation}
+        For a finite subspace $V_N \subseteq V$ find $u_N \in V_N$ such that
+        \begin{equation*}
+            a_\mu(u_N, v_N) = l_\mu(v_N) \quad \forall v_N \in V_N
+        \end{equation*}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Comparison FEM/RBM}
+    \begin{columns}
+        \column{0.5\linewidth}
+            \textbf{FEM} \\
+            \begin{itemize}
+                \item sparse system matrix
+                \item large basis
+                \only<2>{
+                    \item no offline/online decomposition
+                }
+            \end{itemize}
+        \column{0.5\linewidth}
+            \textbf{RBM} \\
+            \begin{itemize}
+                \item dense system matrix
+                \item small basis
+                \only<2>{
+                    \item offline/online decomposition
+                }
+            \end{itemize}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Offline/Online Decomposition}
-    asdfqwerzxcv
+    \begin{block}{Parameter Separability}
+        For $u, v \in V_N, p_a, p_l \in \mathbb{N}$
+        \begin{align*}
+            a_\mu(u, v) &= \sum\limits_{p = 0}^{p_a} \theta_p^a(\mu) a_p(u, v), \\
+            l_\mu(v) &= \sum\limits_{p = 0}^{p_l} \theta_p^l(\mu) l_p(v),
+        \end{align*}
+        where
+        \begin{itemize}
+            \item $\theta^a_i, \theta^l_i$ parameter functions, and
+            \item $a_i, l_i$ \textbf{parameter independent}.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Offline/Online Decomposition}
+    \begin{block}{Offline Assembly}
+        \only<1>{
+            We get the \textbf{offline part}
+            \begin{align*}
+                \mathbb{A}_p^{i, j} &:= a_p(\varphi_i, \varphi_j), i = 1, \dots, N, p = 1, \dots, p_a, \\
+                \mathbb{L}_p^i &:= l_p(\varphi_i), i = 1, \dots, N, p = 1, \dots, p_l,
+            \end{align*}
+            for the reduced basis $\{ \varphi_1, \dots, \varphi_N \}$ of $V_N$.
+        }
+        \only<2>{
+            We get the \textbf{offline part}
+            \begin{align*}
+                \mathbb{A}_p^{i, j} &:= a_p(\varphi_i, \varphi_j), i = 1, \dots, N, p = 1, \dots, p_a, \\
+                \mathbb{L}_p^i &:= l_p(\varphi_i), i = 1, \dots, N, p = 1, \dots, p_l,
+            \end{align*}
+            and the \textbf{online part}
+            \begin{align*}
+                \mathbb{A} := \sum\limits_{p = 1}^{p_a} \theta_p^a(\mu) \mathbb{A}_p, \qquad \mathbb{L} := \sum\limits_{p = 1}^{p_l} \theta_p^l(\mu) \mathbb{L}_p,
+            \end{align*}
+            for the reduced basis $\{ \varphi_1, \dots, \varphi_N \}$ of $V_N$.
+        }
+    \end{block}
 \end{frame}
 
 \subsection{PDE Constrained Optimization}
