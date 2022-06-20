@@ -15,6 +15,7 @@ Here $a_\mu$ is a continuous, coercive, bilinear form, and $l_\mu$ is a continuo
 \begin{equation*}
     \mathcal{J}(u, \mu) := k_\mu(u, u) + j_\mu(u) + \Theta(\mu).
 \end{equation*}
+The constraint $a_\mu(u, v) = l_\mu(v) \; \forall v \in V$ encodes that $u$ must be a solution of the underlying PDE in variatonal form.
 
 To tackle this problem in a repeatable manner, an adaptive trust-region method is employed on a reduced basis model working with a non-conforming dual (NCD) basis approach.
 The advantages of this procedure are:
@@ -26,7 +27,7 @@ The advantages of this procedure are:
 \subsection{Structure}
 
 In the Section~\ref{sec:Preliminaries} we introduce the individual parts required to understand the contents of the paper~\cite{Keil2021}.
-We introduce the theory of reduced basis methods from a background in finite elements, differentiate G\^{a}teaux and Fr\'{e}chet differentiability to state the main objective of PDE constrained optimization, and motivate the two main optimization frame works used to implement the final algorithm.
+We introduce the theory of reduced basis methods from a background in finite elements, distinguishing G\^{a}teaux and Fr\'{e}chet differentiability to state the main objective of PDE constrained optimization, and motivate the two main optimization frame works used to implement the final algorithm.
 Afterwards, Section~\ref{sec:ROMOptSys} highlights the differences between the standard approach to optimality systems in reduced order modelling and the NCD-corrected approach, concluding with an overview of the \textit{a posteriori} error analysis necessary to show a certified approximation property.
 The adaptive trust-region reduced basis algorithm researched by~\cite{Qian2017, Keil2021} is lastly stated in Section~\ref{sec:AdapTRRBAlg} with a short addendum of convergence proofs.
 The proofs of two selected error estimates can be found in Appendix~\ref{sec:Appendix}.

@@ -14,28 +14,22 @@ We can then state the inexact reduced version of~\eqref{TROpti} as introduced in
 where the equality constraint $Res_{\mu^{(k)} + s}^{pr} (u_{N, \mu^{(k)} + s})[v] = 0$ is hidden in $\mathcal{J}_N^{(k)}$, and $\delta^{(k)}$ is the radius of the trust-region.
 
 For every step of the trust-region method we then have to solve the local problem via BFGS.\@
-For the first iteration we need to define the \textbf{approximate general Cauchy point} (AGC).
-This point is defined by
-\begin{equation*}\label{AGCPoint}
-    \mu_{AGC}^{(k)} := \mu^{(k, 0)}(j^{(k, 0)}) = \mathbb{P}_{\mathcal{P}} \left( \mu^{(k, 0)} + \kappa^{j^{(k, 0)}} d^{(k, 0)} \right),
-\end{equation*}
+We iterate for $ l \geq 1$ via
+\begin{align*}
+    \mu^{(k, l)}(j^{(k, l)}) &:= \mathbb{P}_\mathcal{P} \left( \mu^{(k, l)} + \kappa^{j^{(k, l)}} d^{(k, l)} \right), \\
+    \mu^{(k, l+ 1)} &:= \mu^{(k, l)}(j^{(k, l)})
+\end{align*}
 where $\mathbb{P}_\mathcal{P}$ is the projection ${\left( \mathbb{P}_\mathcal{P}(\mu) \right)}_i := \begin{cases}
     {(\mu_a)}_i, {(\mu)}_i \leq {(\mu_a)}_i, \\
     {(\mu)}_i, {(\mu_a)}_i \leq {(\mu)}_i \leq {(\mu_b)}_i, \\
     {(\mu_b)}_i, {(\mu_b)}_i \leq {(\mu)}_i,
 \end{cases}$
-mapping the parameters into the rectangular bounds $\mathcal{P}$ in analogy to the projection described in Subsection~\ref{subsec:TRRB}.
-Here the initial descent direction is $d^{(k, 0)} = - \nabla_\mu \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$, and $j^{(k)}$ is the smallest integer such that the Armijo condition in~\cite[Inequality 4.4]{Keil2021} and the trust-region inequality condition from~\eqref{TRInexactOpti} (cf.~\cite[Inequality 4.5]{Keil2021}).
-We then iterate via
-\begin{align*}
-    \mu^{(k, l)}(j^{(k, l)}) &:= \mathbb{P}_\mathcal{P} \left( \mu^{(k, 0)} + \kappa^{j^{(k, l)}} d^{(k, 0)} \right), \\
-    \mu^{(k, l+ 1)} &:= \mu^{(k, l)}(j_k^{(l)})
-\end{align*}
-with this $j$ once again satisfying the same conditions for the indices $k, l$.
-After the termination condition for the BFGS method has been reached at $L$ iterations, see~\cite[Inequalities 4.6a and 4.6b]{Keil2021}, we set $\mu^{(k + 1)} := \mu^{(k, L)}$ for the next (potential) trust-region iteration.
+mapping the parameters into the rectangular bounds of $\mathcal{P}$ in analogy to the projection described in Subsection~\ref{subsec:TRRB}.
+Here the descent direction is $d^{(k, l)}$, and $j^{(k, l)}$ is the smallest integer such that the Armijo condition for the BFGS method in~\cite[Inequality 4.4]{Keil2021} and the trust-region inequality condition from~\eqref{TRInexactOpti} are satisfied (cf.~\cite[Inequality 4.5]{Keil2021}).
+After the termination condition for the BFGS method has been reached at $L$ iterations, see~\cite[Inequalities 4.6a and 4.6b]{Keil2021}, we set $\mu^{(k + 1)} :=\mu^{(k + 1, 0)} := \mu^{(k, L)}$ for the next (potential) trust-region iteration.
 
 As explained in~\cite{Keil2021}, the main drawback of the trust-region algorithm is that in the standard version the trust-radius may be significantly shrunk, thus missing out on the rate of convergence for the BFGS method.
-To fix this, we define the threshold $\eta \in \interval[open right]{1}{\frac{3}{4}}$ and the criterion for enlarging the radius as proposed in~\cite[Inequality 4.7]{Keil2021} by
+To fix this, we define the threshold $\eta \in \interval[open right]{\frac{3}{4}}{1}$ and the criterion for enlarging the radius as proposed in~\cite[Inequality 4.7]{Keil2021} by
 \begin{equation*}\label{EnlargingCriterion}
     \rho^{(k)} := \frac{\mathcal{J}(\mu^{(k)}) - \mathcal{J}(\mu^{(k + 1)})}{\mathcal{J}_N^{(k)}(\mu^{(k)}) - \mathcal{J}_N^{(k)}(\mu^{(k + 1)})} \geq \eta.
 \end{equation*}
