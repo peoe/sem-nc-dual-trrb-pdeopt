@@ -1,8 +1,30 @@
 \section{Optimality Systems and \textit{a posteriori} Error Estimates}
 
+\begin{frame}{Optimality Conditions}
+    \begin{block}{First Order Necessary Conditions, c.f.~\cite{Keil2021}}
+        For any locally optimal pair $(u, \mu)$ there exists an optimal dual variable $p \in V$ such that the following conditions are satisfied
+        \begin{align*}
+            a_\mu(u, v) &= l_\mu(v) &&\forall v \in V \\
+            a_\mu(u, p) &= \partial_u \mathcal{J}(u, \mu)[v] &&\forall v \in V \\
+            0 &\leq (\nabla_\mu \mathcal{J}(u, \mu) + \nabla_\mu l_\mu(p) - \nabla_\mu a_\mu(u, p)) \cdot (\nu - \mu) &&\forall \nu \in \mathcal{P}.
+        \end{align*}
+    \end{block}
+\end{frame}
+
 \begin{frame}{Primal and Dual Equations}
-    % todo show short derivation/set of equations
-    qwer
+    \begin{block}{Primal Residual}
+        For $u, v \in V, \mu \in \mathcal{P}$ we define
+        \begin{equation*}
+            Res_\mu^{pr}(u)[v] := l_\mu(v) - a_\mu(u, v).
+        \end{equation*}
+    \end{block}
+    \begin{block}{Dual Residual}
+        For $u, v, p \in V, \mu \in \mathcal{P}$ we define
+        \begin{equation*}
+            Res_\mu^{du}(u, p)[v] := j_\mu(v) + 2 k_\mu(v, u) - a_\mu(v, p).
+        \end{equation*}
+    \end{block}
+    \textbf{Lagrangian:} $\mathcal{L}(u, \mu, p) := \mathcal{J}(u, \mu) - Res_\mu^{pr}(u)[p]$
 \end{frame}
 
 \begin{frame}{Inexact Gradient}
