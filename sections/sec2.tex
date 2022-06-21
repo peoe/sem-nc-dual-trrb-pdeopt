@@ -11,7 +11,7 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Reduced Basis Method}
+\begin{frame}{Reduced Basis Method, c.f.\@e.g.~\cite{Ohlberger2015}}
     \begin{block}{Idea}
         Construct an $N$-dimensional subspace $V_N \subseteq V$ of the full order model (FOM) space $V$.
     \end{block}
@@ -118,20 +118,29 @@
 \subsection{PDE Constrained Optimization}
 
 \begin{frame}{PDE Constrained Optimization}
-    % todo image from paper?
-    qwer
+    \begin{block}{Motivation}
+        Parameter dependence in PDEs:
+        \begin{itemize}
+            \item material properties
+            \item velocities
+            \item heat sources/sinks
+        \end{itemize}
+    \end{block}
+    \only<2>{
+        \center{\textbf{How to determine optimal parameters?}}
+    }
 \end{frame}
 
 \begin{frame}{PDE Constrained Optimization}
-    \begin{block}{Problem Description}
+    \begin{block}{Problem Description, c.f.~\cite{Hinze2009}}
         We consider
         \begin{align*}
             &\min\limits_{\mu \in \mathcal{P}} \mathcal{J}(u, \mu) \qquad s.t.\\
-            &e_\mu(u, v) = 0 \qquad \forall v \in V,
+            &e(u, \mu) = 0,
         \end{align*}
         where $e_\mu(u, v)$ encodes the PDE constraint
         \begin{equation*}
-            e_\mu(u, v) := l_\mu(v) - a_\mu(u, v)
+            e(u, \mu) := l_\mu(v) - a_\mu(u, v) \qquad \forall v \in V \text{ or } V_N
         \end{equation*}
     \end{block}
 \end{frame}
@@ -139,13 +148,56 @@
 \subsection{Trust-Region and BFGS Method}
 
 \begin{frame}{Trust-Region Method}
-    % todo graphical demonstration
+    % todo graphical demonstration with geogebra
     qwer
 \end{frame}
 
 \begin{frame}{Trust-Region Method}
-    % todo exact definition and short remark on convergence criteria -> motivation for a posteriori error estimates!!!s
-    asdf
+    \begin{block}{Model function, c.f.~\cite{Kelley1999}}
+        \only<1, 2>{Cost functional $\mathcal{J}$ may be expensive to compute.}
+        \only<2>{
+            \\~\\
+            \textbf{Idea:} Replace with simpler function $m^{(k)}$ modelling $\mathcal{J}$ around some point $x^{(k)}$ \only<2>{$\mu^{(k)}$}.
+        }
+        \only<3>{Replace $\mathcal{J}$ with simpler \textbf{model function} $m^{(k)}$ around some point $x^{(k)}$.}
+    \end{block}
+    \only<3>{
+        \begin{block}{Trust-Region}
+            Region where $m^{(k)}$ approximates $\mathcal{J}$ well:
+            \begin{equation*}
+                \Delta^{(k)} := \left\{ x \in X \; | \; \norm[X]{x - x^{(k)}} \leq \delta^{(k)} \right\}.
+            \end{equation*}
+            \begin{itemize}
+                \item $\Delta^{(k)}$: \textbf{trust-region}
+                \item $\delta^{(k)}$: \textbf{trust-radius}
+            \end{itemize}
+        \end{block}
+    }
+\end{frame}
+
+\begin{frame}{Trust-Region Method}
+    \begin{block}{Trust-Region Method}
+        \textbf{Idea:} Optimize model function locally, i.e.\@
+        \begin{align*}
+            \argmin\limits_{\norm{s} \leq \delta^{(k)}} m^{(k)}(x^{(k)} + s) \\
+            (s.t. \text{ constraints are satisfied}).
+        \end{align*}
+    \end{block}
+    \only<2>{
+        \textbf{Note:} this implies use of a local optimization algorithm!
+    }
+\end{frame}
+
+\begin{frame}{Enrichment}
+    \textbf{Problem:} updating of the TR parameters
+    \only<2, 3, 4, 5>{
+        \begin{itemize}
+            \item Enrich model function \only<2>{every iteration}\only<3, 4, 5>{if necessary}
+            \only<4, 5>{
+                \item Shrink trust-radius if necessary\only<5>{, enlarge trust-radius if possible}
+            }
+        \end{itemize}
+    }
 \end{frame}
 
 \begin{frame}{BFGS Method}
