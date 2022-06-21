@@ -59,8 +59,42 @@
 \end{frame}
 
 \begin{frame}{Optimality Conditions --- NCD-Corrected Approach}
-    % todo add ncd approach equations and comparison to inexact gradient and standard optimality conditions
-    asdf
+    \only<1>{
+        \begin{block}{NCD-Corrected Functional, c.f.~\cite{Keil2021}}
+            For $v_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we define
+            \begin{equation*}
+                \mathcal{J}_N(\mu) := \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu}) = J_N(\mu) + Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}]
+            \end{equation*}
+        \end{block}
+    }
+    \only<2>{
+        \begin{block}{NCD-Corrected Gradient, Standard Approach, c.f.~\cite{Keil2021}}
+            For $v_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we get
+            \begin{align*}
+                {\left( \nabla_\mu \mathcal{J}_N (\mu) \right)}_i &= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) \\
+                &+ \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu} + w_{N, \mu}] - \partial_{\mu_i} Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[z_{N, \mu}],
+            \end{align*}
+            where $z_{N, \mu} \in V_N^{du}, w_{N, \mu} \in V_N^{pr}$ satisfy
+            \begin{align*}
+                a_\mu(z_{N, \mu}, q) &= - Res_\mu^{pr}(u_{N, \mu})[q] &&\forall q \in V_N^{du}, \text{ and} \\
+                a_\mu(v, w_{N, \mu}) &= Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[v] - 2 k_\mu(z_{N, \mu}, v) &&\forall v \in V_N^{pr}.
+            \end{align*}
+        \end{block}
+    }
+    \only<3>{
+        \begin{block}{NCD-Corrected Gradient, Sensitivity Approach, c.f.~\cite{Keil2021}}
+            For $v_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we alternatively get
+            \begin{align*}
+                {\left( \nabla_\mu \mathcal{J}_N(\mu) \right)}_i &= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
+                &+ Res_\mu^{pr}(u_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[d_{\mu_i} u_{N, \mu}],
+            \end{align*}
+            where the sensitivities for some $\nu \in \mathcal{P}$ are implicitly defined by
+            \begin{align*}
+                a_\mu(d_\nu u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot \nu &&\forall v \in V_N^{pr} \\
+                a_\mu(q, d_\nu p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot \nu + 2 k_\mu(q, d_\nu u_{N, \mu}) &&\forall q \in V_N^{du}
+            \end{align*}
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{\textit{a posteriori} Error Estimates}
