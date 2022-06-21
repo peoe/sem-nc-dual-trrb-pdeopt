@@ -27,14 +27,20 @@
     \textbf{Lagrangian:} $\mathcal{L}(u, \mu, p) := \mathcal{J}(u, \mu) - Res_\mu^{pr}(u)[p]$
 \end{frame}
 
-\begin{frame}{Inexact Gradient}
-    % todo add rems on inexact gradient for standard functional
-    asdfqwe
-\end{frame}
-
 \begin{frame}{Optimality Conditions --- Standard Approach}
-    % show results (more how they look like and less what they actually are)
-    asdf
+    \begin{block}{Reduced Functional}
+        For $\mu \in \mathcal{P}$ we define
+        \begin{equation*}
+            J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu),
+        \end{equation*}
+        where $u_{N, \mu}$ defines the reduced solution for $\mu$.
+    \end{block}
+    \only<2>{
+        Then the gradient is
+        \begin{equation*}
+            {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p)[d_{\mu_i} u_{N, \mu}] + \partial_{\mu_i} \mathcal{L}(u_{N, \mu}, \mu, p) \quad \forall p \in V_N^{du}.
+        \end{equation*}
+    }
 \end{frame}
 
 \begin{frame}{Optimality Conditions --- NCD-Corrected Approach}
