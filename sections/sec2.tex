@@ -117,6 +117,41 @@
 
 \subsection{PDE Constrained Optimization}
 
+\begin{frame}{Notes on Differentiability}
+    \only<1, 2>{
+        \begin{block}{Directional Derivative, c.f.~\cite{Hinze2009}}
+            $F: X \rightarrow Y$ if
+            \begin{equation*}
+                dF(x)[h] := \lim\limits_{t \rightarrow 0} \frac{F(x + th) - F(x)}{t} \in Y
+            \end{equation*}
+            exists.
+        \end{block}
+    }
+    \only<2, 3>{
+        \begin{block}{G\^{a}teaux Derivative, c.f.~\cite{Hinze2009}}
+            $F: X \rightarrow Y$ if $dF(x) \in \mathcal{L}(X, Y)$.
+        \end{block}
+    }
+    \only<3>{
+        \begin{block}{Fr\'{e}chet Derivative, c.f.~\cite{Hinze2009}}
+            $F: X \rightarrow Y$ if for $\norm[x]{h} \rightarrow 0$ it holds that
+            \begin{equation*}
+                \norm[Y]{F(x + th) - F(x) - dF(x)[h]} = o(\norm[X]{h}).
+            \end{equation*}
+        \end{block}
+    }
+    \only<4>{
+        \begin{block}{Bilinear Form}
+            The chain rule also holds true:
+            \begin{align*}
+                d_\mu a_\mu(u_\mu, v_\mu) \cdot \nu &= \partial_\mu a_\mu(u_\mu, v_\mu) \cdot \nu + \partial_u a_\mu(u_\mu, v_\mu)[d_\nu u_\mu] + \partial_v a_\mu(u_\mu, v_\mu)[d_\nu v_\mu] \\
+                &= \partial_\mu a_\mu(u_\mu, v_\mu) \cdot \nu + a_\mu(d_\nu u_\mu, v_\mu) + a_\mu(u_\mu, d_\nu v_\mu).
+            \end{align*}
+            $d_\nu u_\mu, d_\nu v_\mu$ are also called \textbf{sensitivities}.
+        \end{block}
+    }
+\end{frame}
+
 \begin{frame}{PDE Constrained Optimization}
     \begin{block}{Motivation}
         Parameter dependence in PDEs:
