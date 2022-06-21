@@ -28,17 +28,32 @@
 \end{frame}
 
 \begin{frame}{Optimality Conditions --- Standard Approach}
-    \begin{block}{Reduced Functional}
-        For $\mu \in \mathcal{P}$ we define
-        \begin{equation*}
-            J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu),
-        \end{equation*}
-        where $u_{N, \mu}$ defines the reduced solution for $\mu$.
-    \end{block}
-    \only<2>{
-        Then the gradient is
+    \only<1, 2>{
+        \begin{block}{Reduced Functional}
+            For $\mu \in \mathcal{P}$ we define
+            \begin{equation*}
+                J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu),
+            \end{equation*}
+            where $u_{N, \mu}$ defines the reduced solution for $\mu$.
+        \end{block}
+    }
+    \only<2, 3, 4>{
+        Then the gradient for all $p \in V_N^{du}$ is
         \begin{equation*}
             {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p)[d_{\mu_i} u_{N, \mu}] + \partial_{\mu_i} \mathcal{L}(u_{N, \mu}, \mu, p) \quad \forall p \in V_N^{du}.
+        \end{equation*}
+    }
+    \only<3, 4>{
+        \begin{block}{Inexact Gradient}
+            For better numerical results later on, we define
+            \begin{equation*}
+                {\left( \tilde{\nabla}_\mu J_N(\mu) \right)}_i := \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}].
+            \end{equation*}
+        \end{block}
+    }
+    \only<4>{
+        \begin{equation*}
+            \Rightarrow {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu})[d_{\mu_i} u_{N, \mu}] + {\left( \tilde{\nabla}_\mu J_N(\mu) \right)}_i
         \end{equation*}
     }
 \end{frame}
