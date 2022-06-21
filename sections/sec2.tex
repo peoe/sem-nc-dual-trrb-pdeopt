@@ -201,5 +201,33 @@
 \end{frame}
 
 \begin{frame}{BFGS Method}
-    qwer
+    \begin{block}{Newton Method, c.f.~\cite{Nocedal2006}}
+        \vspace*{-13pt}
+        \begin{align*}
+            x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \\
+            d^{(k)} := - {\mathcal{H}(x^{(k)})}^{-1} \nabla \mathcal{J}(x^{(k)})
+        \end{align*}
+    \end{block}
+\end{frame}
+
+\begin{frame}{BFGS Method}
+    \begin{block}{Quasi Newton Method, c.f.~\cite{Kelley1999, Nocedal2006}}
+        \vspace*{-13pt}
+        \begin{align*}
+            x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \\
+            d^{(k)} := - {\mathcal{H}^{(k)}(x^{(k)})}^{-1} \nabla \mathcal{J}(x^{(k)}),
+        \end{align*}
+        $\mathcal{H}^{(k)}$ is symmetric, pos.\@ def.\@ matrix updated every iteration to approximate the true Hessian.
+    \end{block}
+\end{frame}
+
+\begin{frame}{BFGS Method}
+    \begin{block}{BFGS Update Formula}
+        \vspace*{-13pt}
+        \begin{align*}
+            \mathcal{H}^{(k + 1)} &:= \mathcal{H}^{(k)} + \frac{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)}){(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T}{{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T s^{(k)}}, \\
+            s^{(k)} &:= x^{(k + 1)} - x^{(k)}, \\
+            y^{(k + 1)} &:= \nabla \mathcal{J}(x^{(k + 1)}) - \nabla \mathcal{J}(x^{(k)})
+        \end{align*}
+    \end{block}
 \end{frame}
