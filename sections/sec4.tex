@@ -58,7 +58,7 @@ A more robust proof has been given in~\cite{Banholzer2020}, though the method de
     Set $k := 0, loop\_flag := true$\;
     \While{$loop\_flag$}{
         Compute $\mu^{(k + 1)}$ by the BFGS method\;
-        \If{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+        \If{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
             Accept $\mu^{(k + 1)}$, update the reduced spaces at $\mu^{(k + 1)}$, and compute $\rho^{(k)}$\;\label{Update1}
             \If{$\rho^{(k)} \geq \eta$}{
                 Enlarge the radius $\delta^{(k + 1)} := \beta_1^{-1} \delta^{(k)}$\;
@@ -67,12 +67,12 @@ A more robust proof has been given in~\cite{Banholzer2020}, though the method de
                 Keep $\delta^{(k + 1)} := \delta^{(k)}$\;
             }
         }
-        \ElseIf{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+        \ElseIf{$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
             Reject $\mu^{(k + 1)}$, shrink the radius $\delta^{(k + 1)} := \beta_1 \delta^{(k)}$, and go to 3\;
         }
         \Else{
             Update the reduced spaces at $\mu^{(k)}$, and compute $\rho^{(k)}$\;\label{Update2}
-            \If{$\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu_{AGC}^{(k)})$}{
+            \If{$\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
                 Accept $\mu^{(k + 1)}$\;
                 \If{$\rho^{(k)} \geq \eta$}{
                     Enlarge the radius\;
