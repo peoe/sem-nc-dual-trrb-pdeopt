@@ -69,13 +69,13 @@
                 Compute locally optimal solution\;
                 
                 \If{some condition}{
-                    Continue witout refining\;
+                    Continue with refinement\;
                 }
                 \ElseIf{some other condition}{
-                    Continue after refining\;
+                    Repeat optimization step with smaller domain\;
                 }
                 \ElseIf{some third condition}{
-                    Refine and repeat optimization step\;
+                    Refine and possibly repeat optimization step\;
                 }
             }
         \end{algorithm}

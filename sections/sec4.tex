@@ -2,11 +2,129 @@
 
 \subsection{The TR-RB Algorithm}
 
+% todo: add hint about how to choose the model function
+
 \begin{frame}{TR-RB Algorithm}
-    % todo state algorithm
-    \begin{algorithm}[H]
-        asfd\;
-    \end{algorithm}
+    \only<1>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{some condition}{
+                    Continue with refinement\;
+                }
+                \ElseIf{some other condition}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<2>{
+        % todo state algorithm
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{\color{red}$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
+                    Continue with refinement\;
+                }
+                \ElseIf{some other condition}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<3>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{\color{red}parameter smaller}{
+                    Continue with refinement\;
+                }
+                \ElseIf{some other condition}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<4>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{parameter smaller}{
+                    Continue with refinement\;
+                }
+                \ElseIf{\color{red}$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<5>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{parameter smaller}{
+                    Continue with refinement\;
+                }
+                \ElseIf{\color{red}parameter larger}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \ElseIf{some third condition}{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<6>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{parameter smaller}{
+                    Continue with refinement\;
+                }
+                \ElseIf{parameter larger}{
+                    Repeat optimization step with smaller domain\;
+                }
+                \Else{
+                    Refine and possibly repeat optimization step\;
+                }
+            }
+        \end{algorithm}
+    }
+    \only<7>{
+        \begin{algorithm}[H]
+            \While{not converged}{
+                Compute locally optimal solution\;
+                
+                \If{parameter smaller}{
+                    \color{red} Refine and potentially enlarge trust-radius\;
+                }
+                \ElseIf{parameter larger}{
+                    \color{red} Repeat optimization step with smaller domain\;
+                }
+                \Else{
+                    \color{red} Refine and check whether to repeat optimization (shrinking, enlarging, or keeping of trust-radius depending on outcome)\;
+                }
+            }
+        \end{algorithm}
+    }
 \end{frame}
 
 \subsection{Convergence of the TR-RB Algorithm}
