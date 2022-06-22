@@ -56,7 +56,7 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{\color{red}parameter smaller}{
+                \If{\color{red}decrease suffienctly small}{
                     Continue with refinement\;
                 }
                 \ElseIf{some other condition}{
@@ -74,7 +74,7 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{parameter smaller}{
+                \If{decrease suffienctly small}{
                     Continue with refinement\;
                 }
                 \ElseIf{\color{red}$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
@@ -92,10 +92,10 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{parameter smaller}{
+                \If{decrease suffienctly small}{
                     Continue with refinement\;
                 }
-                \ElseIf{\color{red}parameter larger}{
+                \ElseIf{\color{red}decrease not small enough}{
                     Repeat optimization step with smaller domain\;
                 }
                 \ElseIf{some third condition}{
@@ -110,10 +110,10 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{parameter smaller}{
+                \If{decrease suffienctly small}{
                     Continue with refinement\;
                 }
-                \ElseIf{parameter larger}{
+                \ElseIf{decrease not small enough}{
                     Repeat optimization step with smaller domain\;
                 }
                 \Else{
@@ -128,10 +128,10 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{parameter smaller}{
+                \If{decrease suffienctly small}{
                     \color{red} Refine and potentially enlarge trust-radius\;
                 }
-                \ElseIf{parameter larger}{
+                \ElseIf{decrease not small enough}{
                     \color{red} Repeat optimization step with smaller domain\;
                 }
                 \Else{
@@ -145,11 +145,43 @@
 \subsection{Convergence of the TR-RB Algorithm}
 
 \begin{frame}{Overview on Convergence}
-    % todo highlight the three different approaches from keil, qian, banholzer
+    \begin{block}{Remarks on the Proof}
+        \begin{itemize}
+            \item $\mathcal{P}$ is compact.
+            \item In~\cite{Keil2021}, the proof is very short; in~\cite{Qian2017}, and~\cite{Banholzer2020} more explicit versions can be found
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
-    asdf~\cite{Qian2017}
+    \only<1>{
+        \begin{block}{General Idea, c.f.~\cite{Qian2017}}
+            For the TR method to converge we require that
+            \begin{enumerate}
+                \item the error of $m^{(k)}$ can be bounded over all of $\mathcal{P}$,
+                \item at any $\mu \in \mathcal{P}$ we can reduce the approximation error of $m^{(k)}$ to some small tolerance $\varepsilon > 0$, and
+                \item $m^{(k)}$ is smooth with a finite gradient everywhere.
+            \end{enumerate}
+        \end{block}
+    }
+
+    \only<2, 3>{
+        \begin{block}{Specific Formulations, c.f.~\cite{Qian2017}}
+            For our problem we get
+            \begin{itemize}
+                \item $\abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)$,
+                \item $\norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu)$, and
+                \item $\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$.
+            \end{itemize}
+        \end{block}
+    }
+
+    \only<3>{
+        The last is equivalent to
+        \begin{equation*}
+            \mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)}).
+        \end{equation*}
+    }
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
