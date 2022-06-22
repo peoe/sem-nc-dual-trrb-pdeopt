@@ -2,7 +2,17 @@
 
 \subsection{The TR-RB Algorithm}
 
-% todo: add hint about how to choose the model function
+\begin{frame}{TR-RB Algorithm}
+    \begin{block}{Choice of Model Function}
+        We choose
+        \begin{equation*}
+            m^{(k)}(\eta) := \mathcal{J}_N^{(k)}(\mu^{(k)} + \eta),
+        \end{equation*}
+        where $\eta \in \mathcal{P}$. \\~\\
+
+        \only<2>{Note: $\mathcal{J}_N \neq \mathcal{J}_N^{(k)}$! These are based upon different spaces $V_N^{pr, k}, V_N^{du, k}$.}
+    \end{block}
+\end{frame}
 
 \begin{frame}{TR-RB Algorithm}
     \only<1>{
@@ -112,7 +122,7 @@
             }
         \end{algorithm}
     }
-    
+
     \only<7>{
         \begin{algorithm}[H]
             \While{not converged}{
