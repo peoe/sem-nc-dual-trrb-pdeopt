@@ -148,7 +148,8 @@
     \begin{block}{Remarks on the Proof}
         \begin{itemize}
             \item $\mathcal{P}$ is compact.
-            \item In~\cite{Keil2021}, the proof is very short; in~\cite{Qian2017}, and~\cite{Banholzer2020} more explicit versions can be found
+            \item In~\cite{Keil2021}, the proof is very short; in~\cite{Qian2017} more explicit versions can be found.
+            \only<2>{\item Proper \textbf{convergence is not shown}, just that ``all accumulation points of the sequence of parameters are first order critical points''!}
         \end{itemize}
     \end{block}
 \end{frame}
@@ -185,7 +186,24 @@
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
-    qwre~\cite{Keil2021}
+    \begin{block}{Assumptions}
+        \begin{itemize}
+            \item $\mathcal{J}(u, \mu)$ is strictly positive.
+            \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease
+        \end{itemize}
+    \end{block}
+
+    \only<2, 3>{
+        \begin{block}{Result 1}
+            The line search for a parameter in the trust-region takes finitely many iterations to complete.
+        \end{block}
+    }
+
+    \only<3>{
+        \begin{block}{Block 2}
+            Every accumulation point of $\mu^{(k)}$ are first order critical points.
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
