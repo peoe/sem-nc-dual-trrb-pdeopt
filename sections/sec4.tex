@@ -142,7 +142,26 @@
     }
 \end{frame}
 
-% explain parameter finding and interaction of tr and bfgs (index j!)
+\begin{frame}{TR-RB Algorithm}
+    \begin{block}{Inner Loop (BFGS), c.f.~\cite{Qian2017, Keil2021}}
+        The inner (BFGS) step is
+        \begin{equation*}
+            \mu^{(k, l + 1)} := \mu^{(k, l)}(j) := \mathbb{P}(\mu^{(k, l)} + \kappa^j d^{(k, l)}),
+        \end{equation*}
+        where
+        \begin{equation*}
+            {\mathbb{P}(\mu)}_i := \begin{cases}
+                {(\mu_a)}_i, {(\mu)}_i \leq {(\mu_a)}_i, \\
+                {(\mu)}_i, {(\mu_a)}_i \leq {(\mu)}_i \leq {(\mu_b)}_i, \\
+                {(\mu_b)}_i, {(\mu_b)}_i \leq {(\mu)}_i
+            \end{cases}.
+        \end{equation*}
+        Finally,
+        \begin{equation*}
+            \mu^{(k + 1)} := \mu^{(k, L)}.
+        \end{equation*}
+    \end{block}
+\end{frame}
 
 \subsection{Convergence of the TR-RB Algorithm}
 
