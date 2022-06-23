@@ -61,7 +61,7 @@
 \begin{frame}{Optimality Conditions --- NCD-Corrected Approach}
     \only<1>{
         \begin{block}{NCD-Corrected Functional, c.f.~\cite{Keil2021}}
-            For $v_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we define
+            For $u_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we define
             \begin{equation*}
                 \mathcal{J}_N(\mu) := \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu}) = J_N(\mu) + Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}]
             \end{equation*}
@@ -88,7 +88,7 @@
                 {\left( \nabla_\mu \mathcal{J}_N(\mu) \right)}_i &= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
                 &+ Res_\mu^{pr}(u_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[d_{\mu_i} u_{N, \mu}],
             \end{align*}
-            where the sensitivities for some $\nu \in \mathcal{P}$ are implicitly defined by
+            where the sensitivities for some $\nu \in \mathcal{P}$ are defined by
             \begin{align*}
                 a_\mu(d_\nu u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot \nu &&\forall v \in V_N^{pr} \\
                 a_\mu(q, d_\nu p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot \nu + 2 k_\mu(q, d_\nu u_{N, \mu}) &&\forall q \in V_N^{du}

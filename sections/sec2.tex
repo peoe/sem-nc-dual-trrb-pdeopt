@@ -81,28 +81,31 @@
 \end{frame}
 
 \begin{frame}{Offline/Online Decomposition}
-    \begin{block}{Offline Assembly}
-        \only<1>{
+    \only<1>{
+        \begin{block}{Offline Assembly}
             We get the \textbf{offline part}
             \begin{align*}
                 \mathbb{A}_p^{i, j} &:= a_p(\varphi_i, \varphi_j), i = 1, \dots, N, p = 1, \dots, p_a, \\
                 \mathbb{L}_p^i &:= l_p(\varphi_i), i = 1, \dots, N, p = 1, \dots, p_l,
             \end{align*}
             for the reduced basis $\{ \varphi_1, \dots, \varphi_N \}$ of $V_N$.
-        }
-        \only<2>{
-            We get the \textbf{offline part}
+        \end{block}
+    }
+    \only<2>{
+        \begin{block}{Offline Assembly}
+            \vspace*{-13pt}
             \begin{align*}
-                \mathbb{A}_p^{i, j} &:= a_p(\varphi_i, \varphi_j), i = 1, \dots, N, p = 1, \dots, p_a, \\
-                \mathbb{L}_p^i &:= l_p(\varphi_i), i = 1, \dots, N, p = 1, \dots, p_l,
+                \mathbb{A}_p^{i, j} := a_p(\varphi_i, \varphi_j), \qquad \mathbb{L}_p^i := l_p(\varphi_i)
             \end{align*}
-            and the \textbf{online part}
+        \end{block}
+        \begin{block}{Online Assembly}
+            We get the \textbf{online part}
             \begin{align*}
                 \mathbb{A} := \sum\limits_{p = 1}^{p_a} \theta_p^a(\mu) \mathbb{A}_p, \qquad \mathbb{L} := \sum\limits_{p = 1}^{p_l} \theta_p^l(\mu) \mathbb{L}_p,
             \end{align*}
             for the reduced basis $\{ \varphi_1, \dots, \varphi_N \}$ of $V_N$.
-        }
-    \end{block}
+        \end{block}
+    }
 \end{frame}
 
 \subsection{PDE Constrained Optimization}
@@ -174,10 +177,10 @@
 
 \begin{frame}{Trust-Region Method}
     \begin{block}{Model function, c.f.~\cite{Kelley1999}}
-        \only<1, 2>{Cost functional $\mathcal{J}$ may be expensive to compute.}
+        \only<1, 2>{Cost functional $\mathcal{J}$ too expensive to efficiently optimize.}
         \only<2>{
             \\~\\
-            \textbf{Idea:} Replace with simpler function $m^{(k)}$ modelling $\mathcal{J}$ around some point $x^{(k)}$ \only<2>{$\mu^{(k)}$}.
+            \textbf{Idea:} Replace with simpler function $m^{(k)}$ modelling $\mathcal{J}$ around some point $x^{(k)}$.
         }
         \only<3>{Replace $\mathcal{J}$ with simpler \textbf{model function} $m^{(k)}$ around some point $x^{(k)}$.}
     \end{block}
@@ -204,12 +207,12 @@
         \end{align*}
     \end{block}
     \only<2>{
-        \textbf{Note:} this implies use of a local optimization algorithm!
+        \textbf{Note:} This implies use of a local optimization algorithm!
     }
 \end{frame}
 
 \begin{frame}{Enrichment}
-    \textbf{Problem:} updating of the TR parameters
+    \textbf{Problem:} Updating of the TR parameters
     \only<2, 3, 4, 5>{
         \begin{itemize}
             \item Enrich model function \only<2>{every iteration}\only<3, 4, 5>{if necessary}
@@ -235,7 +238,7 @@
         \vspace*{-13pt}
         \begin{align*}
             x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \\
-            d^{(k)} := - {\mathcal{H}^{(k)}(x^{(k)})}^{-1} \nabla \mathcal{J}(x^{(k)}),
+            d^{(k)} := - {\mathcal{H}^{(k)}}^{-1} \nabla \mathcal{J}(x^{(k)}),
         \end{align*}
         $\mathcal{H}^{(k)}$ is symmetric, pos.\@ def.\@ matrix updated every iteration to approximate the true Hessian.
     \end{block}

@@ -56,7 +56,7 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{\color{red}decrease suffienctly small}{
+                \If{\color{red}output decrease sufficiently small}{
                     Continue with refinement\;
                 }
                 \ElseIf{some other condition}{
@@ -74,7 +74,7 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{decrease suffienctly small}{
+                \If{output decrease sufficiently small}{
                     Continue with refinement\;
                 }
                 \ElseIf{\color{red}$\mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) > \mathcal{J}_N^{(k)}(\mu^{(k)})$}{
@@ -92,10 +92,10 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{decrease suffienctly small}{
+                \If{output decrease sufficiently small}{
                     Continue with refinement\;
                 }
-                \ElseIf{\color{red}decrease not small enough}{
+                \ElseIf{\color{red}output decrease not small enough}{
                     Repeat optimization step with smaller domain\;
                 }
                 \ElseIf{some third condition}{
@@ -110,10 +110,10 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{decrease suffienctly small}{
+                \If{output decrease sufficiently small}{
                     Continue with refinement\;
                 }
-                \ElseIf{decrease not small enough}{
+                \ElseIf{output decrease not small enough}{
                     Repeat optimization step with smaller domain\;
                 }
                 \Else{
@@ -128,11 +128,11 @@
             \While{not converged}{
                 Compute locally optimal solution\;
                 
-                \If{decrease suffienctly small}{
+                \If{output decrease sufficiently small}{
                     \color{red} Refine and potentially enlarge trust-radius\;
                 }
-                \ElseIf{decrease not small enough}{
-                    \color{red} Repeat optimization step with smaller domain\;
+                \ElseIf{output decrease not small enough}{
+                    Repeat optimization step with smaller domain\;
                 }
                 \Else{
                     \color{red} Refine and check whether to repeat optimization (shrinking, enlarging, or keeping of trust-radius depending on outcome)\;
@@ -170,7 +170,7 @@
         \begin{itemize}
             \item $\mathcal{P}$ is compact.
             \item In~\cite{Keil2021}, the proof is very short; in~\cite{Qian2017} more explicit versions can be found.
-            \only<2>{\item Proper \textbf{convergence is not shown}, just that ``all accumulation points of the sequence of parameters are first order critical points''!}
+            \only<2>{\item Proper \textbf{convergence is not shown}, just that ``all accumulation points of the sequence of parameters are approximate first order critical points''!}
         \end{itemize}
     \end{block}
 \end{frame}
@@ -232,7 +232,10 @@
 
 \begin{frame}{Convergence Arguments}
     \begin{block}{Lemma 2, c.f.~\cite[Theorem 4.5]{Keil2021}}
-        Every accumulation point of $\mu^{(k)}$ are first order critical points.
+        Every accumulation point of $\mu^{(k)}$ is an approximate first order critical points, i.e.\@ for $\tau > 0$
+        \begin{equation*}
+            \norm[2]{\mu - \mathbb{P}(\mu - \nabla_\mu \mathcal{J}(\mu))} \leq \tau.
+        \end{equation*}
     \end{block}
 
     \only<2>{
@@ -240,10 +243,10 @@
 
         After enrichment,
         \begin{equation*}
-            q^{(k)}(\mu^{(k)}) := \frac{\Delta_{\mathcal{J}_N^{(k)}}(\mu)}{\mathcal{J}_N^{(k)}(\mu)} = 0,
+            q^{(k)}(\mu) := \frac{\Delta_{\mathcal{J}_N^{(k)}}(\mu)}{\mathcal{J}_N^{(k)}(\mu)} = 0,
         \end{equation*}
         and because $V$ and $V_N$ are finite subspaces, we after at most a finite amount of time have no more approximation error on $\mathcal{P}$.
-        From then on, all points in the convergent subsequence are first order critical points.
+        From then on, all points in the convergent subsequence are approximate first order critical points.
     }
 \end{frame}
 
@@ -264,8 +267,8 @@
             \begin{enumerate}
                 \item We can find a bound on the iterated ROM gradient.
                 \item We can find a bound on $q^{(k)}$ satisfying the TR conditions.
-                \item The parameter produced by the inner iteration satisfies the TR conditions.
-                \item Every accumulation point of the outer parameter sequence is a first order critical point.
+                \item The parameters produced by the inner iteration satisfy the TR conditions.
+                \item Every accumulation point of the outer parameter sequence is an approximate first order critical point.
             \end{enumerate}
         \end{block}
     }
