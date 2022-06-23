@@ -142,6 +142,8 @@
     }
 \end{frame}
 
+% explain parameter finding and interaction of tr and bfgs (index j!)
+
 \subsection{Convergence of the TR-RB Algorithm}
 
 \begin{frame}{Overview on Convergence}
@@ -189,23 +191,52 @@
     \begin{block}{Assumptions}
         \begin{itemize}
             \item $\mathcal{J}(u, \mu)$ is strictly positive.
-            \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease
+            \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
         \end{itemize}
     \end{block}
 
     \only<2, 3>{
-        \begin{block}{Result 1}
+        \begin{block}{Lemma 1, c.f.~\cite[Lemma 4.4]{Keil2021}}
             The line search for a parameter in the trust-region takes finitely many iterations to complete.
         \end{block}
     }
 
     \only<3>{
-        \begin{block}{Block 2}
+        \begin{block}{Lemma 2, c.f.~\cite[Theorem 4.5]{Keil2021}}
             Every accumulation point of $\mu^{(k)}$ are first order critical points.
         \end{block}
     }
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
-    zxcv~\cite{Banholzer2020}
+    \textbf{Note:} This is a convergence argument for a projected newton algorithm in the inner loop!
+
+    \only<2, 3, 4, 5>{
+        \begin{block}{Assumptions, c.f.~\cite{Banholzer2020}}
+            \begin{itemize}
+                \item $\mathcal{J}$ is strictly positive.
+                \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
+                \only<3>{\item \color{red} The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.}
+                \only<4>{
+                    \item The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.
+                    \item \color{red} The function $q^{(k)}$ is uniformly continuous in $\mathcal{P}$, uniformly in $k$.
+                }
+                \only<5>{
+                    \item The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.
+                    \item The function $q^{(k)}$ is uniformly continuous in $\mathcal{P}$, uniformly in $k$.
+                }
+            \end{itemize}
+        \end{block}
+    }
+
+    \only<5>{
+        \begin{block}{General Argument}
+            \begin{enumerate}
+                \item We can find a bound on the iterated ROM gradient.
+                \item We can find a bound on $q^{(k)}$ satisfying the TR conditions.
+                \item The parameter produced by the inner iteration satisfies the TR conditions.
+                \item Every accumulation point of the outer parameter sequence is a first order critical point.
+            \end{enumerate}
+        \end{block}
+    }
 \end{frame}
