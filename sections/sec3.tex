@@ -95,9 +95,36 @@
             \end{align*}
         \end{block}
     }
-    \only<4>{
-        % todo: add inexact ncd gradient! mention inexact sensitivities, corresponding residuals, and their error estimators -- keep it vague though!
-        qet
+    \only<4, 5, 6>{
+        \textbf{Problem:} $V_N^{pr}, V_N^{du}$ must not be good approximation spaces for the sensitivities.
+
+        \only<5, 6>{
+            \textbf{Solution:} Compute the approximated sensitivities in $V_N^{pr, d_{\mu_i}}, V_N^{du, d_{\mu_i}} \subseteq V$.
+
+            \only<6>{
+                \begin{block}{Approximate Sensitivities}
+                    We define the approximate sensitivities as solutions to
+                    \begin{align*}
+                        a_\mu(\tilde{d}_{\mu_i} u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
+                        a_\mu(q, \tilde{d}_{\mu_i} p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_{N, \mu}) &&\forall q \in V_N^{du, d_{\mu_i}}.                    
+                    \end{align*}
+                \end{block}
+            }
+        }
+    }
+    \only<7>{
+        \begin{align*}
+            a_\mu(\tilde{d}_{\mu_i} u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \\
+            a_\mu(q, \tilde{d}_{\mu_i} p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_{N, \mu}) &&\forall q \in V_N^{du, d_{\mu_i}}.                    
+        \end{align*}
+
+        \begin{block}{Inexact Gradient of NCD-Corrected Functional}
+            We get for the approximate sensitivities:
+            \begin{align*}
+                {\left( \tilde{\nabla}_\mu \mathcal{J}_N(\mu) \right)}_i &:= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
+                &+ Res_\mu^{pr}(u_{N, \mu})[\tilde{d}_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[\tilde{d}_{\mu_i} u_{N, \mu}].
+            \end{align*}
+        \end{block}
     }
 \end{frame}
 
@@ -136,9 +163,5 @@
                 \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \tilde{\nabla}_\mu \mathcal{J}_N(\mu)} &\leq \Delta_{\tilde{\nabla} \mathcal{J}_N}(\mu) := \norm[2]{\Delta^\ast_{\tilde{\nabla} \mathcal{J}_N}(\mu)}.
             \end{align*}
         \end{block}
-    }
-    \only<4>{
-        % todo: think about going into detail of this computation!
-        qweradg
     }
 \end{frame}
