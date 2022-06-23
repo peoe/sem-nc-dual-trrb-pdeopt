@@ -194,42 +194,53 @@
             \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
         \end{itemize}
     \end{block}
+\end{frame}
 
-    \only<2, 3>{
-        \begin{block}{Lemma 1, c.f.~\cite[Lemma 4.4]{Keil2021}}
-            The line search for a parameter in the trust-region takes finitely many iterations to complete.
-        \end{block}
+\begin{frame}{Convergence Arguments}
+    \begin{block}{Lemma 1, c.f.~\cite[Lemma 4.4]{Keil2021}}
+        The line search for a parameter in the trust-region takes finitely many iterations to complete.
+    \end{block}
+
+    \only<2>{
+        We want to find individual indices $j_1, j_2$ satisfying the individual TR conditions.
+
+        For the first index, this follows from a result in~\cite{Kelley1999}.
+        
+        The second index can iteratively be found from the iteration $k = 0$ relying on the Lipschitz continuity of the reduced cost functional and its gradient w.r.t.\@ $\mu$.
+        The iteration then follows from the fact that after enrichment the same argument as for $k = 0$ applies, and that we only increase the index after enrichment of the ROM space.
     }
+\end{frame}
 
-    \only<3>{
-        \begin{block}{Lemma 2, c.f.~\cite[Theorem 4.5]{Keil2021}}
-            Every accumulation point of $\mu^{(k)}$ are first order critical points.
-        \end{block}
+\begin{frame}{Convergence Arguments}
+    \begin{block}{Lemma 2, c.f.~\cite[Theorem 4.5]{Keil2021}}
+        Every accumulation point of $\mu^{(k)}$ are first order critical points.
+    \end{block}
+
+    \only<2>{
+        $\mathcal{P}$ is compact, whence we can find a convergent subsequence.
+
+        After enrichment,
+        \begin{equation*}
+            q^{(k)}(\mu^{(k)}) := \frac{\Delta_{\mathcal{J}_N^{(k)}}(\mu)}{\mathcal{J}_N^{(k)}(\mu)} = 0,
+        \end{equation*}
+        and because $V$ and $V_N$ are finite subspaces, we after at most a finite amount of time have no more approximation error on $\mathcal{P}$.
+        From then on, all points in the convergent subsequence are first order critical points.
     }
 \end{frame}
 
 \begin{frame}{Convergence Arguments}
     \textbf{Note:} This is a convergence argument for a projected newton algorithm in the inner loop!
 
-    \only<2, 3, 4, 5>{
+    \only<2>{
         \begin{block}{Assumptions, c.f.~\cite{Banholzer2020}}
             \begin{itemize}
                 \item $\mathcal{J}$ is strictly positive.
                 \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
-                \only<3>{\item \color{red} The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.}
-                \only<4>{
-                    \item The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.
-                    \item \color{red} The function $q^{(k)}$ is uniformly continuous in $\mathcal{P}$, uniformly in $k$.
-                }
-                \only<5>{
-                    \item The gradient $\nabla \mathcal{J}_N^{(k)}$ is uniformly Lipschitz continuous on $\mathcal{P}$. The second order derivatives are locally Lipschitz continuous.
-                    \item The function $q^{(k)}$ is uniformly continuous in $\mathcal{P}$, uniformly in $k$.
-                }
             \end{itemize}
         \end{block}
     }
 
-    \only<5>{
+    \only<3>{
         \begin{block}{General Argument}
             \begin{enumerate}
                 \item We can find a bound on the iterated ROM gradient.
