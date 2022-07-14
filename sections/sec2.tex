@@ -3,17 +3,32 @@
 \subsection{PDE Constrained Optimization}
 
 \begin{frame}{PDE Constrained Optimization}
-    \begin{block}{Problem Description, c.f.~\cite{Hinze2009}}
-        We consider
-        \begin{align*}
-            &\min\limits_{\mu \in \mathcal{P}} \mathcal{J}(u, \mu) \qquad s.t.\\
-            &e(u, \mu) = 0,
-        \end{align*}
-        where $e_\mu(u, v)$ encodes the PDE constraint
-        \begin{equation*}
-            e(u, \mu) := l_\mu(v) - a_\mu(u, v) \qquad \forall v \in V \text{ or } V_N
-        \end{equation*}
-    \end{block}
+    \only<1>{
+        \begin{block}{Motivation}
+            Parameter dependence in PDEs:
+            \begin{itemize}
+                \item material properties
+                \item velocities
+                \item heat sources/sinks
+                \item \dots
+            \end{itemize}
+        \end{block}
+        \center{\textbf{How to determine optimal parameters?}}
+    }
+
+    \only<2>{
+        \begin{block}{Problem Description, c.f.~\cite{Hinze2009}}
+            We consider
+            \begin{align*}
+                &\min\limits_{\mu \in \mathcal{P}} \mathcal{J}(u, \mu) \qquad s.t.\\
+                &e(u, \mu) = 0,
+            \end{align*}
+            where $e_\mu(u, v)$ encodes the PDE constraint
+            \begin{equation*}
+                e(u, \mu) := l_\mu(v) - a_\mu(u, v) \qquad \forall v \in V \text{ or } V_N
+            \end{equation*}
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{Notes on Differentiability}
@@ -49,81 +64,79 @@
 \subsection{Trust-Region and BFGS Method}
 
 \begin{frame}{Trust-Region Method}
-    \begin{block}{Model function, c.f.~\cite{Kelley1999}}
-        \only<1, 2>{Cost functional $\mathcal{J}$ too expensive to efficiently optimize.}
-        \only<2>{
-            \\~\\
-            \textbf{Idea:} Replace with simpler function $m^{(k)}$ modelling $\mathcal{J}$ around some point $x^{(k)}$.
-        }
-        \only<3>{Replace $\mathcal{J}$ with simpler \textbf{model function} $m^{(k)}$ around some point $x^{(k)}$.}
-    \end{block}
-    \only<3>{
-        \begin{block}{Trust-Region}
-            Region where $m^{(k)}$ approximates $\mathcal{J}$ well:
-            \begin{equation*}
-                \Delta^{(k)} := \left\{ x \in X \; | \; \norm[X]{x - x^{(k)}} \leq \delta^{(k)} \right\}.
-            \end{equation*}
-            \begin{itemize}
-                \item $\Delta^{(k)}$: \textbf{trust-region}
-                \item $\delta^{(k)}$: \textbf{trust-radius}
-            \end{itemize}
-        \end{block}
-    }
+    \begin{columns}
+        \column{0.5\linewidth}
+            \begin{figure}
+                \centering
+                \begin{tikzpicture}[>=stealth]
+                    \draw[fill=white] (-2.5,-2) rectangle (3,3);
+                    \draw[black](2.2,2.5) node[right] (scrip) {$\mathcal{P}$};
+                    \draw[fill=black] (-1.4,1.8) circle [radius=0.03, color=black];
+                    \draw[black](-1.4,1.8) node[left] (scrip) {$\mu^{(0)}$};
+                    \draw[fill=black] (2.4,-1.1) circle [radius=0.03, color=black];
+                    \draw[black](2.4,-1.1) node[right] (scrip) {$\bar{\mu}$};
+                    %\draw[->] (-1.2,1.6) -- (1.8,-0.9) node; %[midway,right] {Optimization};
+                    \draw[->, opacity=0.5] (-1.2,1.6) -- (2.2,-0.9) node {}; %[midway,right] {Optimization};
+                    \draw[->,black] (-1.4,1.8) -- (-0.85,2.5) node [midway,right] {$\delta_0$};
+                    \draw[black] (-1.4,1.8) circle [radius=0.9, color=black];
+                    \draw[->,black] (-1.4,1.8) -- (-0.6,1.4) node [right] {$\mu^{(1)}$};
+                    \draw[black, opacity=0.5] (-0.6,1.4) circle [radius=0.6, color=black];
+                    \draw[->,black, opacity=0.5] (-0.6,1.4) -- (-0.15,1) node [right] {$\mu^{(2)}$};
+                    %\draw[fill=black, opacity=0.5] (0,0.85) circle [radius=0.03, color=black];
+                    %\draw[fill=black, opacity=0.5] (0.15,0.75) circle [radius=0.03, color=black];
+                    \draw[fill=black, opacity=0.5] (0.3,0.65) circle [radius=0.02, color=black];
+                    \draw[fill=black, opacity=0.5] (0.45,0.55) circle [radius=0.02, color=black];
+                    \draw[fill=black, opacity=0.5] (0.6,0.45) circle [radius=0.02, color=black];
+                    \draw[fill=black] (1.35,-0.05) circle [radius=0.03, color=black];
+                    \draw[black](1.35,-0.05) node[right] (scrip) {$\mu^{(k)}$};
+                    \draw[black, opacity=0.5] (1.35,-0.05) circle [radius=0.7, color=black];
+                    \draw[->,black, opacity=0.5] (1.35,-0.05) -- (1.85,-0.55) node [right] {$\mu^{(k+1)}$};
+                \end{tikzpicture}
+                \caption{Local adaptation (TR) on the domain,\\figure courtesy of Tim Keil}
+            \end{figure}
+        \column{0.5\linewidth}
+            \begin{block}{Model function, c.f.~\cite{Kelley1999}}
+                    \textbf{Idea:} Replace with simpler function $m^{(k)}$ modelling $\mathcal{J}$ around some point $x^{(k)}$.
+            \end{block}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Trust-Region Method}
-    \begin{block}{Trust-Region Method}
-        \textbf{Idea:} Optimize model function locally, i.e.\@
-        \begin{align*}
-            \argmin\limits_{\norm{s} \leq \delta^{(k)}} m^{(k)}(x^{(k)} + s) \\
-            (s.t. \text{ constraints are satisfied}).
-        \end{align*}
-    \end{block}
-    \only<2>{
-        \textbf{Note:} This implies use of a local optimization algorithm!
-    }
-\end{frame}
-
-\begin{frame}{Enrichment}
-    \textbf{Problem:} Updating of the TR parameters
-    \only<2, 3, 4, 5>{
+    \begin{block}{Requirements, c.f.~\cite{Qian2017}}
         \begin{itemize}
-            \item Enrich model function \only<2>{every iteration}\only<3, 4, 5>{if necessary}
-            \only<4, 5>{
-                \item Shrink trust-radius if necessary\only<5>{, enlarge trust-radius if possible}
-            }
+            \item $\abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)$,
+            \item $\norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu)$, and
+            \item $\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$
         \end{itemize}
-    }
+    \end{block}
+
+    The last is equivalent to
+    \begin{equation*}
+        \mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)})
+    \end{equation*}
 \end{frame}
 
 \begin{frame}{BFGS Method}
     \begin{block}{Newton Method, c.f.~\cite{Nocedal2006}}
-        \vspace*{-13pt}
-        \begin{align*}
-            x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \\
-            d^{(k)} := - {\mathcal{H}(x^{(k)})}^{-1} \nabla \mathcal{J}(x^{(k)})
-        \end{align*}
+        \vspace*{-8pt}
+        \[ x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \]
+        \[ d^{(k)} := - {\mathcal{H}(x^{(k)})}^{-1} \nabla \mathcal{J}(x^{(k)}) \]
     \end{block}
-\end{frame}
 
-\begin{frame}{BFGS Method}
-    \begin{block}{Quasi Newton Method, c.f.~\cite{Kelley1999, Nocedal2006}}
-        \vspace*{-13pt}
-        \begin{align*}
-            x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \\
-            d^{(k)} := - {\mathcal{H}^{(k)}}^{-1} \nabla \mathcal{J}(x^{(k)}),
-        \end{align*}
-        $\mathcal{H}^{(k)}$ is symmetric, pos.\@ def.\@ matrix updated every iteration to approximate the true Hessian.
-    \end{block}
+    \only<2>{
+        \begin{block}{Quasi Newton Method, c.f.~\cite{Kelley1999, Nocedal2006}}
+            \vspace*{-8pt}
+            \[  x^{(k + 1)} := x^{(k)} + \kappa^{(k)} d^{(k)}, \]
+            \[ d^{(k)} := - {\mathcal{H}^{(k)}}^{-1} \nabla \mathcal{J}(x^{(k)}) \]
+        \end{block}
+    }
 \end{frame}
 
 \begin{frame}{BFGS Method}
     \begin{block}{BFGS Update Formula}
-        \vspace*{-13pt}
-        \begin{align*}
-            \mathcal{H}^{(k + 1)} &:= \mathcal{H}^{(k)} + \frac{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)}){(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T}{{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T s^{(k)}}, \\
-            s^{(k)} &:= x^{(k + 1)} - x^{(k)}, \\
-            y^{(k + 1)} &:= \nabla \mathcal{J}(x^{(k + 1)}) - \nabla \mathcal{J}(x^{(k)})
-        \end{align*}
+        \vspace*{-8pt}
+        \[ \mathcal{H}^{(k + 1)} := \mathcal{H}^{(k)} + \frac{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)}){(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T}{{(y^{(k)} - \mathcal{H}^{(k)} s^{(k)})}^T s^{(k)}}, \]
+        \[ s^{(k)} := x^{(k + 1)} - x^{(k)}, \]
+        \[ y^{(k + 1)} := \nabla \mathcal{J}(x^{(k + 1)}) - \nabla \mathcal{J}(x^{(k)}) \]
     \end{block}
 \end{frame}
