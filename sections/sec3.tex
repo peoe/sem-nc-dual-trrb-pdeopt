@@ -1,16 +1,5 @@
 \section{Optimality Systems and \textit{a posteriori} Error Estimates}
 
-\begin{frame}{Optimality Conditions}
-    \begin{block}{First Order Necessary Conditions, c.f.~\cite{Keil2021}}
-        For any locally optimal pair $(u, \mu)$ there exists an optimal dual variable $p \in V$ such that the following conditions are satisfied
-        \begin{align*}
-            a_\mu(u, v) &= l_\mu(v) &&\forall v \in V \\
-            a_\mu(u, p) &= \partial_u \mathcal{J}(u, \mu)[v] &&\forall v \in V \\
-            0 &\leq (\nabla_\mu \mathcal{J}(u, \mu) + \nabla_\mu l_\mu(p) - \nabla_\mu a_\mu(u, p)) \cdot (\nu - \mu) &&\forall \nu \in \mathcal{P}.
-        \end{align*}
-    \end{block}
-\end{frame}
-
 \begin{frame}{Primal and Dual Equations}
     \begin{block}{Primal Residual}
         For $u, v \in V, \mu \in \mathcal{P}$ we define
@@ -24,38 +13,33 @@
             Res_\mu^{du}(u, p)[v] := j_\mu(v) + 2 k_\mu(v, u) - a_\mu(v, p).
         \end{equation*}
     \end{block}
+\end{frame}
+
+\begin{frame}{Optimality Conditions}
     \textbf{Lagrangian:} $\mathcal{L}(u, \mu, p) := \mathcal{J}(u, \mu) - Res_\mu^{pr}(u)[p]$
+
+    \begin{block}{First Order Necessary Conditions, c.f.~\cite{Keil2021}}
+        For any locally optimal pair $(u, \mu)$ there exists an optimal dual variable $p \in V$ such that the following conditions are satisfied
+        \begin{align*}
+            a_\mu(u, v) &= l_\mu(v) &&\forall v \in V \\
+            a_\mu(u, p) &= \partial_u \mathcal{J}(u, \mu)[v] &&\forall v \in V \\
+            0 &\leq \nabla_\mu \mathcal{L}(u, \mu, p) \cdot (\nu - \mu) &&\forall \nu \in \mathcal{P}.
+        \end{align*}
+    \end{block}
 \end{frame}
 
 \begin{frame}{Optimality Conditions --- Standard Approach}
-    \only<1, 2>{
-        \begin{block}{Reduced Functional}
-            For $\mu \in \mathcal{P}$ we define
-            \begin{equation*}
-                J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu),
-            \end{equation*}
-            where $u_{N, \mu}$ defines the reduced solution for $\mu$.
-        \end{block}
-    }
-    \only<2, 3, 4>{
-        Then the gradient for all $p \in V_N^{du}$ is
+    \begin{block}{Reduced Functional}
+        For $\mu \in \mathcal{P}$ we define
         \begin{equation*}
-            {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p)[d_{\mu_i} u_{N, \mu}] + \partial_{\mu_i} \mathcal{L}(u_{N, \mu}, \mu, p) \quad \forall p \in V_N^{du}.
+            J_N(\mu) := \mathcal{J}(u_{N, \mu}, \mu),
         \end{equation*}
-    }
-    \only<3, 4>{
-        \begin{block}{Inexact Gradient}
-            For better numerical results later on, we define
-            \begin{equation*}
-                {\left( \tilde{\nabla}_\mu J_N(\mu) \right)}_i := \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}].
-            \end{equation*}
-        \end{block}
-    }
-    \only<4>{
-        \begin{equation*}
-            \Rightarrow {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p_{N, \mu})[d_{\mu_i} u_{N, \mu}] + {\left( \tilde{\nabla}_\mu J_N(\mu) \right)}_i
-        \end{equation*}
-    }
+        where $u_{N, \mu}$ defines the reduced solution for $\mu$.
+    \end{block}
+    Then the gradient for all $p \in V_N^{du}$ is
+    \begin{equation*}
+        {\left( \nabla_\mu J_N(\mu) \right)}_i = \partial_u \mathcal{L}(u_{N, \mu}, \mu, p)[d_{\mu_i} u_{N, \mu}] + \partial_{\mu_i} \mathcal{L}(u_{N, \mu}, \mu, p) \quad \forall p \in V_N^{du}.
+    \end{equation*}
 \end{frame}
 
 \begin{frame}{Optimality Conditions --- NCD-Corrected Approach}
@@ -78,51 +62,6 @@
             \begin{align*}
                 a_\mu(z_{N, \mu}, q) &= - Res_\mu^{pr}(u_{N, \mu})[q] &&\forall q \in V_N^{du}, \text{ and} \\
                 a_\mu(v, w_{N, \mu}) &= Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[v] - 2 k_\mu(z_{N, \mu}, v) &&\forall v \in V_N^{pr}.
-            \end{align*}
-        \end{block}
-    }
-    \only<3>{
-        \begin{block}{NCD-Corrected Gradient, Sensitivity Approach, c.f.~\cite{Keil2021}}
-            For $v_{N, \mu} \in V_N^{pr}, p_{N, \mu} \in V_N^{du}$ we alternatively get
-            \begin{align*}
-                {\left( \nabla_\mu \mathcal{J}_N(\mu) \right)}_i &= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
-                &+ Res_\mu^{pr}(u_{N, \mu})[d_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[d_{\mu_i} u_{N, \mu}],
-            \end{align*}
-            where the sensitivities for some $\nu \in \mathcal{P}$ are defined by
-            \begin{align*}
-                a_\mu(d_\nu u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot \nu &&\forall v \in V_N^{pr} \\
-                a_\mu(q, d_\nu p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot \nu + 2 k_\mu(q, d_\nu u_{N, \mu}) &&\forall q \in V_N^{du}
-            \end{align*}
-        \end{block}
-    }
-    \only<4, 5, 6>{
-        \textbf{Problem:} $V_N^{pr}, V_N^{du}$ must not be good approximation spaces for the sensitivities.
-
-        \only<5, 6>{
-            \textbf{Solution:} Compute the approximated sensitivities in $V_N^{pr, d_{\mu_i}}, V_N^{du, d_{\mu_i}} \subseteq V$.
-
-            \only<6>{
-                \begin{block}{Approximate Sensitivities}
-                    We define the approximate sensitivities as solutions to
-                    \begin{align*}
-                        a_\mu(\tilde{d}_{\mu_i} u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \text{ and} \\
-                        a_\mu(q, \tilde{d}_{\mu_i} p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_{N, \mu}) &&\forall q \in V_N^{du, d_{\mu_i}}.                    
-                    \end{align*}
-                \end{block}
-            }
-        }
-    }
-    \only<7>{
-        \begin{align*}
-            a_\mu(\tilde{d}_{\mu_i} u_{N, \mu}, v) &= \partial_\mu Res_\mu^{pr}(u_{N, \mu})[v] \cdot e_i &&\forall v \in V_N^{pr, d_{\mu_i}}, \\
-            a_\mu(q, \tilde{d}_{\mu_i} p_{N, \mu}) &= \partial_\mu Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[q] \cdot e_i + 2 k_\mu(q, \tilde{d}_{\mu_i} u_{N, \mu}) &&\forall q \in V_N^{du, d_{\mu_i}}.                    
-        \end{align*}
-
-        \begin{block}{Inexact Gradient of NCD-Corrected Functional}
-            We get for the approximate sensitivities:
-            \begin{align*}
-                {\left( \tilde{\nabla}_\mu \mathcal{J}_N(\mu) \right)}_i &:= \partial_{\mu_i} \mathcal{J}(u_{N, \mu}, \mu) + \partial_{\mu_i} Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}] \\
-                &+ Res_\mu^{pr}(u_{N, \mu})[\tilde{d}_{\mu_i} p_{N, \mu}] + Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})[\tilde{d}_{\mu_i} u_{N, \mu}].
             \end{align*}
         \end{block}
     }
@@ -158,10 +97,9 @@
         \end{equation*}
         \begin{block}{Output Gradient Model Reduction Error, c.f.~\cite{Qian2017, Keil2021}}
             For $\mu \in \mathcal{P}, u_\mu \in V, u_{N, \mu} \in V_N^{pr}, p_\mu \in V, p_{N, \mu} \in V_N^{du}$ we have
-            \begin{align*}
-                \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} &\leq \Delta_{\nabla \mathcal{J}_N}(\mu) := \norm[2]{\Delta^\ast_{\nabla \mathcal{J}_N}(\mu)}, \text{ and} \\
-                \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \tilde{\nabla}_\mu \mathcal{J}_N(\mu)} &\leq \Delta_{\tilde{\nabla} \mathcal{J}_N}(\mu) := \norm[2]{\Delta^\ast_{\tilde{\nabla} \mathcal{J}_N}(\mu)}.
-            \end{align*}
+            \begin{equation*}
+                \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu) := \norm[2]{\Delta^\ast_{\nabla \mathcal{J}_N}(\mu)}.
+            \end{equation*}
         \end{block}
     }
 \end{frame}
