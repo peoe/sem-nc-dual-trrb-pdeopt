@@ -10,7 +10,7 @@
         \end{equation*}
         where $\eta \in \mathcal{P}$. \\~\\
 
-        \only<2>{Note: $\mathcal{J}_N \neq \mathcal{J}_N^{(k)}$! These are based upon different spaces $V_N^{pr, k}, V_N^{du, k}$.}
+        Note: $\mathcal{J}_N \neq \mathcal{J}_N^{(k)}$! These are based upon different spaces $V_N^{pr, k}, V_N^{du, k}$.
     \end{block}
 \end{frame}
 
@@ -166,110 +166,8 @@
 \subsection{Convergence of the TR-RB Algorithm}
 
 \begin{frame}{Overview on Convergence}
-    \begin{block}{Remarks on the Proof}
-        \begin{itemize}
-            \item $\mathcal{P}$ is compact.
-            \item In~\cite{Keil2021}, the proof is very short; in~\cite{Qian2017} more explicit versions can be found.
-            \only<2>{\item Proper \textbf{convergence is not shown}, just that ``all accumulation points of the sequence of parameters are approximate first order critical points''!}
-        \end{itemize}
+    Proper \textbf{convergence is not shown}, just
+    \begin{block}{}
+        All accumulation points of the sequence of parameters are approximate first order critical points.
     \end{block}
-\end{frame}
-
-\begin{frame}{Convergence Arguments}
-    \only<1>{
-        \begin{block}{General Idea, c.f.~\cite{Qian2017}}
-            For the TR method to converge we require that
-            \begin{enumerate}
-                \item the error of $m^{(k)}$ can be bounded over all of $\mathcal{P}$,
-                \item at any $\mu \in \mathcal{P}$ we can reduce the approximation error of $m^{(k)}$ to some small tolerance $\varepsilon > 0$, and
-                \item $m^{(k)}$ is smooth with a finite gradient everywhere.
-            \end{enumerate}
-        \end{block}
-    }
-
-    \only<2, 3>{
-        \begin{block}{Specific Formulations, c.f.~\cite{Qian2017}}
-            For our problem we get
-            \begin{itemize}
-                \item $\abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)$,
-                \item $\norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu)$, and
-                \item $\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$.
-            \end{itemize}
-        \end{block}
-    }
-
-    \only<3>{
-        The last is equivalent to
-        \begin{equation*}
-            \mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)}).
-        \end{equation*}
-    }
-\end{frame}
-
-\begin{frame}{Convergence Arguments}
-    \begin{block}{Assumptions}
-        \begin{itemize}
-            \item $\mathcal{J}(u, \mu)$ is strictly positive.
-            \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}{Convergence Arguments}
-    \begin{block}{Lemma 1, c.f.~\cite[Lemma 4.4]{Keil2021}}
-        The line search for a parameter in the trust-region takes finitely many iterations to complete.
-    \end{block}
-
-    \only<2>{
-        We want to find individual indices $j_1, j_2$ satisfying the individual TR conditions.
-
-        For the first index, this follows from a result in~\cite{Kelley1999}.
-        
-        The second index can iteratively be found from the iteration $k = 0$ relying on the Lipschitz continuity of the reduced cost functional and its gradient w.r.t.\@ $\mu$.
-        The iteration then follows from the fact that after enrichment the same argument as for $k = 0$ applies, and that we only increase the index after enrichment of the ROM space.
-    }
-\end{frame}
-
-\begin{frame}{Convergence Arguments}
-    \begin{block}{Lemma 2, c.f.~\cite[Theorem 4.5]{Keil2021}}
-        Every accumulation point of $\mu^{(k)}$ is an approximate first order critical points, i.e.\@ for $\tau > 0$
-        \begin{equation*}
-            \norm[2]{\mu - \mathbb{P}(\mu - \nabla_\mu \mathcal{J}(\mu))} \leq \tau.
-        \end{equation*}
-    \end{block}
-
-    \only<2>{
-        $\mathcal{P}$ is compact, whence we can find a convergent subsequence.
-
-        After enrichment,
-        \begin{equation*}
-            q^{(k)}(\mu) := \frac{\Delta_{\mathcal{J}_N^{(k)}}(\mu)}{\mathcal{J}_N^{(k)}(\mu)} = 0,
-        \end{equation*}
-        and because $V$ and $V_N$ are finite subspaces, we after at most a finite amount of time have no more approximation error on $\mathcal{P}$.
-        From then on, all points in the convergent subsequence are approximate first order critical points.
-    }
-\end{frame}
-
-\begin{frame}{Convergence Arguments}
-    \textbf{Note:} This is a convergence argument for a projected newton algorithm in the inner loop!
-
-    \only<2>{
-        \begin{block}{Assumptions, c.f.~\cite{Banholzer2020}}
-            \begin{itemize}
-                \item $\mathcal{J}$ is strictly positive.
-                \item For every TR iteration $k$ we can find a trust-radius large enough for which the decrease condition is satisfied.
-            \end{itemize}
-        \end{block}
-    }
-
-    \only<3>{
-        \begin{block}{General Argument}
-            \begin{enumerate}
-                \item We can find a bound on the iterated ROM gradient.
-                \item We can find a bound on $q^{(k)}$ satisfying the TR conditions.
-                \item The parameters produced by the inner iteration satisfy the TR conditions.
-                \item Every accumulation point of the outer parameter sequence is an approximate first order critical point.
-            \end{enumerate}
-        \end{block}
-    }
 \end{frame}
