@@ -82,23 +82,10 @@
         \begin{equation*}
             \norm{u_\mu - u_{N, \mu}} \leq \Delta_{pr}(\mu), \qquad \norm{p_\mu - p_{N, \mu}} \leq \Delta_{du}(\mu)
         \end{equation*}
-        \begin{block}{Output Model Reduction Error, c.f.~\cite{Qian2017, Keil2021}}
-            For $\mu \in \mathcal{P}, u_\mu \in V, u_{N, \mu} \in V_N^{pr}, p_\mu \in V, p_{N, \mu} \in V_N^{du}$ we have
-            \begin{align*}
-                \abs{\mathcal{J}(u_\mu, \mu) - J_N(\mu)} &\leq \Delta_{J_N}(\mu) := \Delta_{pr}(\mu) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} \\
-                &+ {\Delta_{pr}(\mu)}^2 \gamma_{k_\mu} + \abs{Res_\mu^{pr}(u_{N, \mu})[p_{N, \mu}]}, \text{ and} \\
-                \abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} &\leq \Delta_{\mathcal{J}_N}(\mu) := \Delta_{pr}(\mu) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} + {\Delta_{pr}(\mu)}^2 \gamma_{k_\mu}.
-            \end{align*}
-        \end{block}
-    }
-    \only<3>{
-        \begin{equation*}
-            \abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)
-        \end{equation*}
-        \begin{block}{Output Gradient Model Reduction Error, c.f.~\cite{Qian2017, Keil2021}}
+        \begin{block}{Output Model Reduction Error, c.f.~\cite{Keil2021}}
             For $\mu \in \mathcal{P}, u_\mu \in V, u_{N, \mu} \in V_N^{pr}, p_\mu \in V, p_{N, \mu} \in V_N^{du}$ we have
             \begin{equation*}
-                \norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu) := \norm[2]{\Delta^\ast_{\nabla \mathcal{J}_N}(\mu)}.
+                \abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu) := \Delta_{pr}(\mu) \norm{Res_\mu^{du}(u_{N, \mu}, p_{N, \mu})} + {\Delta_{pr}(\mu)}^2 \gamma_{k_\mu}.
             \end{equation*}
         \end{block}
     }

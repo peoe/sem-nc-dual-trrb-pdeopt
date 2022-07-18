@@ -104,13 +104,12 @@
 \begin{frame}{Trust-Region Method}
     \begin{block}{Requirements, c.f.~\cite{Qian2017}}
         \begin{itemize}
-            \item $\abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)$,
-            \item $\norm[2]{\nabla_\mu \mathcal{J}(u_\mu, \mu) - \nabla_\mu \mathcal{J}_N(\mu)} \leq \Delta_{\nabla \mathcal{J}_N}(\mu)$, and
+            \item $\abs{\mathcal{J}(u_\mu, \mu) - \mathcal{J}_N(\mu)} \leq \Delta_{\mathcal{J}_N}(\mu)$, and
             \item $\mathcal{J}_N^{(k + 1)}(\mu^{(k + 1)}) \leq \mathcal{J}_N^{(k)}(\mu^{(k, 0)})$
         \end{itemize}
     \end{block}
 
-    The last is equivalent to
+    The second is equivalent to
     \begin{equation*}
         \mathcal{J}_N^{(k)}(\mu^{(k + 1)}) + \Delta_{\mathcal{J}_N^{(k)}}(\mu^{(k + 1)}) < \mathcal{J}_N^{(k)}(\mu^{(k)})
     \end{equation*}
